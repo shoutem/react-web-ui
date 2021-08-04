@@ -2,15 +2,15 @@ import { findDOMNode } from 'react-dom';
 import _ from 'lodash';
 
 function getHoverCenter(hoverBoundingRect, isHorizontal) {
-  return isHorizontal ?
-    (hoverBoundingRect.right - hoverBoundingRect.left) / 2 :
-    (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+  return isHorizontal
+    ? (hoverBoundingRect.right - hoverBoundingRect.left) / 2
+    : (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
 }
 
-function getOffset(clientOffset,hoverBoundingRect, isHorizontal) {
-  return isHorizontal ?
-    clientOffset.x = hoverBoundingRect.left :
-    clientOffset.y - hoverBoundingRect.top;
+function getOffset(clientOffset, hoverBoundingRect, isHorizontal) {
+  return isHorizontal
+    ? (clientOffset.x = hoverBoundingRect.left)
+    : clientOffset.y - hoverBoundingRect.top;
 }
 
 export const types = {
@@ -40,7 +40,8 @@ export function returnNodeToSource(props, node, source, target) {
     target.parentId,
     target.index,
     source.parentId,
-    source.index);
+    source.index,
+  );
 
   updateNodeLocation(node, destination);
 }
@@ -55,7 +56,11 @@ export function detectSecondaryMovement(props, monitor, component) {
 
   const hoverBoundingRect = findDOMNode(component).getBoundingClientRect();
   const sourceClientOffset = monitor.getSourceClientOffset();
-  const axisOffset = getOffset(sourceClientOffset, hoverBoundingRect, isHorizontal);
+  const axisOffset = getOffset(
+    sourceClientOffset,
+    hoverBoundingRect,
+    isHorizontal,
+  );
 
   const leftHorizontalLevelRange = offset + step * (level - 1);
   const rightHorizontalLevelRange = offset + step * (level + 1);

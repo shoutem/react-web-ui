@@ -61,7 +61,8 @@ const nodeTarget = {
         dragIndex,
         hoverParentId,
         hoverIndex,
-        levelChange);
+        levelChange,
+      );
 
       updateNodeLocation(node, destination);
       return;
@@ -69,13 +70,18 @@ const nodeTarget = {
 
     const isVerticalMovement = detectPrimaryMovement(props, monitor, component);
     if (isVerticalMovement) {
-      const destination = props.move(dragParentId, dragIndex, hoverParentId, hoverIndex);
+      const destination = props.move(
+        dragParentId,
+        dragIndex,
+        hoverParentId,
+        hoverIndex,
+      );
       updateNodeLocation(node, destination);
     }
   },
 };
 
-const connectTarget = (connect) => ({
+const connectTarget = connect => ({
   connectDropTarget: connect.dropTarget(),
 });
 

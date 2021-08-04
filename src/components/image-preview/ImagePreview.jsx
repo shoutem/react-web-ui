@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import classnames from 'classnames';
 import { imagePreviewDeleteError } from '../image-uploader';
-import { LoaderContainer } from '../loader'
+import { LoaderContainer } from '../loader';
 import FontIcon from '../font-icon';
 import './style.scss';
 

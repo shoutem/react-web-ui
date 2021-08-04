@@ -1,8 +1,5 @@
 import { DragSource } from 'react-dnd';
-import {
-  types,
-  returnNodeToSource,
-} from './dnd';
+import { types, returnNodeToSource } from './dnd';
 
 const nodeSource = {
   canDrag(props) {

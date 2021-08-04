@@ -22,15 +22,9 @@ function ActionsMenu({ className, children }) {
   const menuId = _.uniqueId('actions-menu-');
 
   return (
-    <Dropdown
-      className={classes}
-      id={menuId}
-      onClick={stopEventPropagation}
-    >
+    <Dropdown className={classes} id={menuId} onClick={stopEventPropagation}>
       <FontIcon bsRole="toggle" name="more" size="24px" />
-      <Dropdown.Menu>
-        {children}
-      </Dropdown.Menu>
+      <Dropdown.Menu>{children}</Dropdown.Menu>
     </Dropdown>
   );
 }

@@ -1,18 +1,11 @@
+/* eslint-disable react/prop-types */
 import React, { Children } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import CircularLoader from './CircularLoader';
 
-function renderNoElement({
-  isLoading,
-  className,
-  children,
-  ...props
-}) {
-  const classNameMap = classNames(
-    className,
-    'loader-container',
-  );
+function renderNoElement({ isLoading, className, children, ...props }) {
+  const classNameMap = classNames(className, 'loader-container');
 
   if (isLoading) {
     return (
@@ -25,32 +18,21 @@ function renderNoElement({
   return Children.only(children);
 }
 
-function render({
-  isLoading,
-  className,
-  children,
-  isOverlay,
-  ...props
-}) {
-  const classNameMap = classNames(
-    className,
-    'loader-container',
-    { 'is-overlay': isOverlay && isLoading }
-  );
+function render({ isLoading, className, children, isOverlay, ...props }) {
+  const classNameMap = classNames(className, 'loader-container', {
+    'is-overlay': isOverlay && isLoading,
+  });
   const showChildren = !isLoading || isOverlay;
 
   return (
     <div className={classNameMap}>
-      {isLoading && <CircularLoader className="loader" {...props} /> }
+      {isLoading && <CircularLoader className="loader" {...props} />}
       {showChildren && children}
     </div>
   );
 }
 
-export default function LoaderContainer({
-  withoutWrapper,
-  ...props,
-}) {
+export default function LoaderContainer({ withoutWrapper, ...props }) {
   if (withoutWrapper) {
     return renderNoElement(props);
   }

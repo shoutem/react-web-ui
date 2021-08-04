@@ -11,13 +11,10 @@ export default class Node extends Component {
     const { canSelect, canCollapse, children } = item;
 
     const isCollapsible = children && children.length > 0;
-    const nodeClasses = classNames(
-      'nested-sortable__node',
-      {
-        'is-dragging': isDragging,
-        'is-horizontal': isHorizontal,
-      }
-    );
+    const nodeClasses = classNames('nested-sortable__node', {
+      'is-dragging': isDragging,
+      'is-horizontal': isHorizontal,
+    });
 
     return (
       <div className={nodeClasses}>
@@ -29,18 +26,14 @@ export default class Node extends Component {
           isHorizontal={isHorizontal}
           hasUpdates={hasUpdates}
         />
-        {item.children && <NodeChildren
-          {...this.props}
-        />}
+        {item.children && <NodeChildren {...this.props} />}
       </div>
     );
   }
 
   render() {
     const { connectDragPreview, connectDropTarget } = this.props;
-    return (
-      connectDragPreview(connectDropTarget(this.renderNode()))
-    );
+    return connectDragPreview(connectDropTarget(this.renderNode()));
   }
 }
 
@@ -52,4 +45,3 @@ Node.propTypes = {
   connectDragPreview: PropTypes.func,
   connectDropTarget: PropTypes.func,
 };
-

@@ -25,10 +25,7 @@ export default class PasswordBox extends Component {
 
     return (
       <div className={classes}>
-        <ActionInput
-          type={inputType}
-          {...this.props}
-        >
+        <ActionInput type={inputType} {...this.props}>
           <ActionInput.Right
             onClick={this.togglePasswordVisibility}
             icon="visibility-on"

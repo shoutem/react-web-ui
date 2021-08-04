@@ -33,11 +33,7 @@ export default class EditableTableCell extends Component {
 
   renderStaticFormControl() {
     const { value } = this.props;
-    return (
-      <FormControl.Static>
-        {value}
-      </FormControl.Static>
-    );
+    return <FormControl.Static>{value}</FormControl.Static>;
   }
 
   render() {
@@ -56,10 +52,7 @@ export default class EditableTableCell extends Component {
 EditableTableCell.propTypes = {
   propKey: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string,
-  ]),
+  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   inEditMode: PropTypes.bool,
   isStatic: PropTypes.bool,
 };

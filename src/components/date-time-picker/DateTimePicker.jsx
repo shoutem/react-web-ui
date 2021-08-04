@@ -78,7 +78,7 @@ export default class DateTimePicker extends Component {
     if (!momentValue.isValid()) {
       // eslint-disable-next-line
       console.error(
-        'Invalid value provided to DateTimePicker: ' + JSON.stringify(value),
+        `Invalid value provided to DateTimePicker: ${JSON.stringify(value)}`,
       );
     }
 

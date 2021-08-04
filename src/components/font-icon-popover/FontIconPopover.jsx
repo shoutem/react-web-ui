@@ -1,19 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
-import classNames from 'classnames'
+import classNames from 'classnames';
 import './style.scss';
 
 function renderPopover(message, className) {
   const classes = classNames('font-icon-popover__popover', className);
   return (
-    <Popover
-      id="font-icon-popover__popover"
-      className={classes}
-    >
+    <Popover id="font-icon-popover__popover" className={classes}>
       {message}
     </Popover>
-  )
+  );
 }
 
 export default function FontIconPopover({
@@ -22,9 +19,8 @@ export default function FontIconPopover({
   message,
   placement,
   trigger,
-  ...props,
+  ...props
 }) {
-
   return (
     <OverlayTrigger
       overlay={renderPopover(message, className)}
@@ -34,7 +30,7 @@ export default function FontIconPopover({
     >
       {React.Children.only(children)}
     </OverlayTrigger>
-  )
+  );
 }
 
 FontIconPopover.propTypes = {
@@ -57,10 +53,7 @@ FontIconPopover.propTypes = {
   /**
    * Action/actions that trigger popover visibility
    */
-  trigger: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.string,
-  ]),
+  trigger: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
 };
 
 FontIconPopover.defaultProps = {

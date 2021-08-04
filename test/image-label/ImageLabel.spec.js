@@ -4,11 +4,7 @@ import ImageLabel from './../../src/components/image-label/ImageLabel';
 
 describe('ImageLabel', () => {
   it('should render image with label', () => {
-    const wrapper = shallow(
-      <ImageLabel src="test.png">
-        test-label
-      </ImageLabel>
-    );
+    const wrapper = shallow(<ImageLabel src="test.png">test-label</ImageLabel>);
 
     const renderedImage = wrapper.find('img');
     assert.lengthOf(renderedImage, 1, 'image not rendered');

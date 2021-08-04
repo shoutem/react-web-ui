@@ -10,7 +10,7 @@ export function getDisplayLabel(
     return emptyText;
   }
 
-  const selectedLabels= _.chain(options)
+  const selectedLabels = _.chain(options)
     .filter(option => _.includes(selectedValues, option.value))
     .map('label')
     .value();
@@ -20,6 +20,7 @@ export function getDisplayLabel(
   }
 
   const visibleLabels = _.slice(selectedLabels, 0, maxSelectedOptionsDisplayed);
-  const suffixLabel = `+ ${(selectedLabels.length - maxSelectedOptionsDisplayed)}`;
+  const suffixLabel = `+ ${selectedLabels.length -
+    maxSelectedOptionsDisplayed}`;
   return `${visibleLabels.join(', ')} ${suffixLabel}`;
 }

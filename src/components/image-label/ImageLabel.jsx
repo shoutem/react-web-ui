@@ -4,10 +4,7 @@ import classNames from 'classnames';
 import './style.scss';
 
 export default function ImageLabel({ src, right, className, size, ...props }) {
-  const classes = classNames(
-    className,
-    'image-label'
-  );
+  const classes = classNames(className, 'image-label');
   const imgContainerClasses = classNames({
     'image-label__img-container': true,
     'is-left': !right,
@@ -49,8 +46,5 @@ ImageLabel.propTypes = {
   /**
    * Define size of an image
    */
-  size: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string,
-  ]),
+  size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };

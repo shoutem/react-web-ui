@@ -14,7 +14,7 @@ const EMOJI_PICKER_STYLE = {
   width: 558,
   marginLeft: -558,
   marginTop: 20,
-}
+};
 export default class FormInput extends Component {
   constructor(props) {
     super(props);
@@ -45,12 +45,12 @@ export default class FormInput extends Component {
         selectionEnd,
         inputValue.length,
       );
-  
+
       const value = `${textBeforeSelectionStart}${emoji.native}${textAfterSelectionEnd}`;
       // We're mocking event object so you don't have to check if it's object or value
-      const event = { target: { value }}
+      const event = { target: { value } };
       onChange(event);
-  
+
       if (_.isFunction(input.focus)) {
         input.focus();
       }
@@ -59,9 +59,9 @@ export default class FormInput extends Component {
 
   handleEmojiPickerToggled() {
     const input = _.get(this.inputRef, 'current');
-      if (!input) {
-        return;
-      }
+    if (!input) {
+      return;
+    }
 
     const selectionStart = input.selectionStart;
     const selectionEnd = input.selectionEnd;
@@ -92,7 +92,10 @@ export default class FormInput extends Component {
     const inputClasses = classNames('form-control', {
       'with-emoji-picker': enableEmojiPicker,
     });
-    const emojiIconClasses = classNames('form-input_emoji-icon', emojiIconClassName);
+    const emojiIconClasses = classNames(
+      'form-input_emoji-icon',
+      emojiIconClassName,
+    );
     const helpBlockText = error || helpText;
 
     return (
@@ -138,6 +141,7 @@ FormInput.propTypes = {
   enableEmojiPicker: PropTypes.bool,
   emojiIconClassName: PropTypes.string,
   emojiPickerStyle: PropTypes.object,
+  onChange: PropTypes.func,
 };
 
 FormInput.defaultProps = {

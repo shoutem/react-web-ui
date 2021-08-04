@@ -5,22 +5,13 @@ import NodeDraggable from '../node-draggable/index';
 import './style.scss';
 
 export default function NodeChildren(props) {
-  const {
-    isDragging,
-    isParentDragging,
-    level,
-    item,
-    isCollapsed,
-  } = props;
+  const { isDragging, isParentDragging, level, item, isCollapsed } = props;
   const { id, children } = item;
   const isDraggingGreedy = isDragging || isParentDragging;
 
-  const nodeBodyClasses = classNames(
-    'nested-sortable__node-children',
-    {
-      'is-collapsed': isCollapsed(item.id),
-    }
-  );
+  const nodeBodyClasses = classNames('nested-sortable__node-children', {
+    'is-collapsed': isCollapsed(item.id),
+  });
 
   return (
     <div className={nodeBodyClasses}>
@@ -37,8 +28,7 @@ export default function NodeChildren(props) {
           isNestable={child.isNestable}
           doesParentAllowDrop={!item.disableDrop}
         />
-        )
-      )}
+      ))}
     </div>
   );
 }

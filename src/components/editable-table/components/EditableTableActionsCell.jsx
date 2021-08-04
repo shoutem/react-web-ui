@@ -20,25 +20,19 @@ export default function EditableTableActionsCell({
 
   return (
     <td className="editable-table-actions-cell">
-      {canDelete &&
-        <EditableTableRowButton
-          onClick={onDeleteClick}
-          iconName="delete"
-        />
-      }
-      {showEditButton &&
-        <EditableTableRowButton
-          onClick={onEditClick}
-          iconName="edit"
-        />
-      }
-      {showSaveButton &&
+      {canDelete && (
+        <EditableTableRowButton onClick={onDeleteClick} iconName="delete" />
+      )}
+      {showEditButton && (
+        <EditableTableRowButton onClick={onEditClick} iconName="edit" />
+      )}
+      {showSaveButton && (
         <EditableTableRowButton
           onClick={onSaveClick}
           iconName="check"
           disabled={!valid}
         />
-      }
+      )}
     </td>
   );
 }

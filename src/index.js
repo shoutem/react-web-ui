@@ -9,7 +9,7 @@ import EditableTable from './components/editable-table';
 import EmptyResourcePlaceholder from './components/empty-resource-placeholder';
 import FontIcon from './components/font-icon';
 import FontIconPopover from './components/font-icon-popover';
-import FormInput from './components/form-input'
+import FormInput from './components/form-input';
 import IconLabel from './components/icon-label';
 import ImageLabel from './components/image-label';
 import ImagePreview from './components/image-preview';

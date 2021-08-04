@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import FontIcon from '../../font-icon';
 
-export default function EditableTableRowButton({ onClick, disabled, iconName }) {
+export default function EditableTableRowButton({
+  onClick,
+  disabled,
+  iconName,
+}) {
   return (
     <Button
       className="btn-icon pull-right"

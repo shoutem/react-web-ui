@@ -82,9 +82,9 @@ export default class EditableTableRow extends Component {
     const { getDisplayValue, property } = fieldDescriptor;
     const currentRow = inEditMode ? stateRow : row;
 
-    const value = (
-      _.isFunction(getDisplayValue) ? getDisplayValue(currentRow) : _.get(currentRow, property)
-    );
+    const value = _.isFunction(getDisplayValue)
+      ? getDisplayValue(currentRow)
+      : _.get(currentRow, property);
 
     return (
       <EditableTableCell
@@ -100,7 +100,13 @@ export default class EditableTableRow extends Component {
 
   render() {
     const { inEditMode } = this.state;
-    const { row, rowDescriptors, canUpdate, canDelete, onRowClick } = this.props;
+    const {
+      row,
+      rowDescriptors,
+      canUpdate,
+      canDelete,
+      onRowClick,
+    } = this.props;
 
     if (!inEditMode && !row) {
       return null;

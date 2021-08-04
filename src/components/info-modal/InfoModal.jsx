@@ -11,11 +11,7 @@ export default function InfoModal({
   onHide,
 }) {
   return (
-    <Modal
-      show
-      onHide={onHide}
-      dialogClassName="info-modal"
-    >
+    <Modal show onHide={onHide} dialogClassName="info-modal">
       <Modal.Header>
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
@@ -23,10 +19,7 @@ export default function InfoModal({
         <div>{message}</div>
       </Modal.Body>
       <Modal.Footer>
-        <Button
-          bsStyle={btnBsStyle}
-          onClick={onHide}
-        >
+        <Button bsStyle={btnBsStyle} onClick={onHide}>
           {btnLabel}
         </Button>
       </Modal.Footer>
@@ -48,10 +41,7 @@ InfoModal.propTypes = {
   /**
    * Content of modal, it can be simple string or component
    */
-  message: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-  ]),
+  message: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /**
    * Display label for button
    */

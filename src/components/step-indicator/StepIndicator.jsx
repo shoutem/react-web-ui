@@ -80,4 +80,5 @@ StepIndicator.propTypes = {
   steps: PropTypes.array,
   className: PropTypes.string,
   onClick: PropTypes.func,
+  activeValue: PropTypes.string,
 };

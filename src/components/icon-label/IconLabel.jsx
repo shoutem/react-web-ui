@@ -4,11 +4,14 @@ import classNames from 'classnames';
 import FontIcon from './../font-icon/FontIcon';
 import './style.scss';
 
-export default function IconLabel({ iconName, right, className, size, ...props }) {
-  const classes = classNames(
-    className,
-    'icon-label'
-  );
+export default function IconLabel({
+  iconName,
+  right,
+  className,
+  size,
+  ...props
+}) {
+  const classes = classNames(className, 'icon-label');
   const fontIconClasses = classNames({
     'icon-label__icon': true,
     'is-left': !right,
@@ -43,10 +46,7 @@ IconLabel.propTypes = {
   /**
    * Define size of icon
    */
-  size: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string,
-  ]),
+  size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 IconLabel.defaultProps = {

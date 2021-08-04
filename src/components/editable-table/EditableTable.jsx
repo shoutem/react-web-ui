@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import classNames from 'classnames';
 import { ControlLabel } from 'react-bootstrap';
-import {
-  EditableTableRow,
-  TableRowTextPlaceholder,
-} from './components';
+import { EditableTableRow, TableRowTextPlaceholder } from './components';
 import './style.scss';
 
 function extractRequiredProps(rowDescriptors) {
@@ -58,12 +55,7 @@ export default class EditableTable extends Component {
   }
 
   handleDeleteRow(index) {
-    const {
-      rows,
-      onRowsUpdated,
-      onRowDeleted,
-      onRowDeleteClick,
-    } = this.props;
+    const { rows, onRowsUpdated, onRowDeleted, onRowDeleteClick } = this.props;
 
     const rowToDelete = rows[index];
     if (_.isFunction(onRowDeleteClick)) {
@@ -74,8 +66,8 @@ export default class EditableTable extends Component {
     }
 
     const updatedRows = [
-      ...(_.slice(rows, 0, index)),
-      ...(_.slice(rows, index + 1)),
+      ..._.slice(rows, 0, index),
+      ..._.slice(rows, index + 1),
     ];
 
     onRowsUpdated(updatedRows);
@@ -83,16 +75,12 @@ export default class EditableTable extends Component {
   }
 
   handleUpdateRow(updatedRow, index) {
-    const {
-      rows,
-      onRowsUpdated,
-      onRowUpdated,
-    } = this.props;
+    const { rows, onRowsUpdated, onRowUpdated } = this.props;
 
     const updatedRows = [
-      ...(_.slice(rows, 0, index)),
+      ..._.slice(rows, 0, index),
       updatedRow,
-      ...(_.slice(rows, index + 1)),
+      ..._.slice(rows, index + 1),
     ];
 
     onRowsUpdated(updatedRows);
@@ -100,11 +88,7 @@ export default class EditableTable extends Component {
   }
 
   handleAddRow(newRow) {
-    const {
-      rows,
-      onRowsUpdated,
-      onRowAdded,
-    } = this.props;
+    const { rows, onRowsUpdated, onRowAdded } = this.props;
     const updatedRows = [newRow, ...rows];
 
     onRowsUpdated(updatedRows);
@@ -141,15 +125,11 @@ export default class EditableTable extends Component {
         canUpdate={rowCanBeUpdated}
         canDelete={rowCanBeDeleted}
       />
-    )
+    );
   }
 
   renderTableRows(displayEmptyState) {
-    const {
-      rows,
-      headers,
-      emptyStateText,
-    } = this.props;
+    const { rows, headers, emptyStateText } = this.props;
     const emptyRows = _.isEmpty(rows);
     if (emptyRows && displayEmptyState) {
       return (
@@ -164,16 +144,9 @@ export default class EditableTable extends Component {
   }
 
   render() {
-    const {
-      className,
-      headers,
-      rowDescriptors,
-    } = this.props;
+    const { className, headers, rowDescriptors } = this.props;
 
-    const {
-      addRowInProgress,
-      requiredProps,
-    } = this.state;
+    const { addRowInProgress, requiredProps } = this.state;
 
     const classes = classNames('editable-table', className);
 
@@ -182,27 +155,27 @@ export default class EditableTable extends Component {
         <table className="table editable-table__table">
           <thead>
             <tr>
-              {_.map(headers, header =>
+              {_.map(headers, header => (
                 <th key={header}>
                   <ControlLabel>{header}</ControlLabel>
                 </th>
-              )}
+              ))}
             </tr>
           </thead>
           <tbody>
-          {addRowInProgress &&
-            <EditableTableRow
-              isEditMode
-              rowDescriptors={rowDescriptors}
-              onSaveClick={this.handleAddRow}
-              onDeleteClick={this.closeNewRow}
-              requiredProps={requiredProps}
-              isStatic={false}
-              canUpdate
-              canDelete
-            />
-          }
-          {this.renderTableRows(!addRowInProgress)}
+            {addRowInProgress && (
+              <EditableTableRow
+                isEditMode
+                rowDescriptors={rowDescriptors}
+                onSaveClick={this.handleAddRow}
+                onDeleteClick={this.closeNewRow}
+                requiredProps={requiredProps}
+                isStatic={false}
+                canUpdate
+                canDelete
+              />
+            )}
+            {this.renderTableRows(!addRowInProgress)}
           </tbody>
         </table>
       </div>
@@ -242,10 +215,8 @@ EditableTable.propTypes = {
    * If string, key will be row property with that name.
    * If function, expected signature is (row:Object): String.
    */
-  rowKeyIdentifier: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.func,
-  ]).isRequired,
+  rowKeyIdentifier: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
+    .isRequired,
   /**
    * Function called on every table change.
    * Input param: complete array of rows
@@ -266,7 +237,7 @@ EditableTable.propTypes = {
    * Input params: updated row's id, updated row
    */
   onRowUpdated: PropTypes.func,
-    /**
+  /**
    * Function called when row is clicked.
    * Output: clicked row.
    */

@@ -5,7 +5,7 @@ import Node from '../node/index';
 
 const NodeDraggable = _.flow(
   new NodeDraggableTarget(),
-  new NodeDraggableSource()
+  new NodeDraggableSource(),
 )(Node);
 
 export default NodeDraggable;

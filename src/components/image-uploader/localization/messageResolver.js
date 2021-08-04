@@ -1,11 +1,10 @@
-import _ from 'lodash';
 import defaultDictionary from './dictionary';
 import { DEFAULT_ERROR_MSG_CODE } from '../const';
 
 let dictionary = defaultDictionary;
 
-export function setDictionary(dictionary) {
-  dictionary = dictionary;
+export function setDictionary(dict) {
+  dictionary = dict;
 }
 
 export function getMessage(code) {

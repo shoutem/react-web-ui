@@ -36,11 +36,13 @@ export default class MultiselectDropdown extends Component {
 
   handleItemSelected(event) {
     const { selectedValues } = this.state;
-    const { target: { checked, value } } = event;
+    const {
+      target: { checked, value },
+    } = event;
 
-    const newSelectedValues = checked ?
-      _.union(selectedValues, [value]) :
-      _.without(selectedValues, value);
+    const newSelectedValues = checked
+      ? _.union(selectedValues, [value])
+      : _.without(selectedValues, value);
 
     this.setState({ selectedValues: newSelectedValues });
   }
@@ -129,7 +131,7 @@ export default class MultiselectDropdown extends Component {
       options,
       selectedValues,
       displayLabelMaxSelectedOptions,
-      emptyText
+      emptyText,
     );
 
     return (
@@ -139,13 +141,9 @@ export default class MultiselectDropdown extends Component {
         id="multiselect-dropdown"
         onToggle={this.handleToggle}
       >
-        <Dropdown.Toggle>
-          {selectedOptionLabel}
-        </Dropdown.Toggle>
+        <Dropdown.Toggle>{selectedOptionLabel}</Dropdown.Toggle>
         <Dropdown.Menu>
-          <MenuItem>
-            {selectedOptionLabel}
-          </MenuItem>
+          <MenuItem>{selectedOptionLabel}</MenuItem>
           <MenuItem divider />
           {showSelectNoneOption && this.renderSelectNoneOption()}
           <div className="multiselect-dropdown__items">

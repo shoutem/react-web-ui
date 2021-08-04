@@ -55,7 +55,7 @@ export default class Switch extends Component {
   }
 
   render() {
-    const { className, children} = this.props;
+    const { className, children } = this.props;
     const classNameMap = classNames('switch', className);
 
     return (

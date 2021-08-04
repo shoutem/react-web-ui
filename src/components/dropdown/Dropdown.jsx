@@ -33,7 +33,12 @@ export default class EnhancedDropdown extends Dropdown {
   updateDropdownState() {
     const dropdownMenu = findDOMNode(this).querySelector('.dropdown-menu');
     const overlaps = this.getElementScreenOverlaps(dropdownMenu);
-    const { overlapsTop, overlapsRight, overlapsBottom, overlapsLeft } = overlaps;
+    const {
+      overlapsTop,
+      overlapsRight,
+      overlapsBottom,
+      overlapsLeft,
+    } = overlaps;
     const dropup = overlapsBottom || (this.props.dropup && !overlapsTop);
     const pullRight = overlapsLeft || (this.props.pullRight && !overlapsRight);
 
@@ -52,7 +57,9 @@ export default class EnhancedDropdown extends Dropdown {
       this.props.onToggle.call(this, open);
     }
 
-    if (!open) { return; }
+    if (!open) {
+      return;
+    }
 
     /**
      * These need to be reset to default values to assure dropdown's
@@ -97,22 +104,18 @@ export default class EnhancedDropdown extends Dropdown {
     const scrolled = this.getDocumentScrollOffset();
 
     return {
-      overlapsTop: elRect.top < (bodyRect.top + scrolled.y),
-      overlapsRight: elRect.right > (bodyRect.right - scrolled.x),
-      overlapsBottom: elRect.bottom > (bodyRect.bottom + scrolled.y),
-      overlapsLeft: elRect.left < (bodyRect.left + scrolled.x),
+      overlapsTop: elRect.top < bodyRect.top + scrolled.y,
+      overlapsRight: elRect.right > bodyRect.right - scrolled.x,
+      overlapsBottom: elRect.bottom > bodyRect.bottom + scrolled.y,
+      overlapsLeft: elRect.left < bodyRect.left + scrolled.x,
     };
   }
 
   render() {
-    const classNameMap = classNames(
-      this.props.className,
-      'enhanced-dropdown',
-      {
-        ready: this.state.ready,
-        entered: this.state.entered,
-      }
-    );
+    const classNameMap = classNames(this.props.className, 'enhanced-dropdown', {
+      ready: this.state.ready,
+      entered: this.state.entered,
+    });
 
     return (
       <Dropdown

@@ -6,9 +6,7 @@ import FontIcon from './../../src/components/font-icon/FontIcon';
 describe('IconLabel', () => {
   it('should render icon with label', () => {
     const wrapper = shallow(
-      <IconLabel iconName="shoutem" >
-        test-label
-      </IconLabel>
+      <IconLabel iconName="shoutem">test-label</IconLabel>,
     );
 
     assert.lengthOf(wrapper.find(FontIcon), 1, 'icon not rendered');
@@ -22,7 +20,7 @@ describe('IconLabel', () => {
     const wrapper = shallow(
       <IconLabel iconName="shoutem" right>
         test-label
-      </IconLabel>
+      </IconLabel>,
     );
 
     const iconRight = wrapper.find('.icon-label__icon.is-right');

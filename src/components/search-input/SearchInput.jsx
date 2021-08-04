@@ -13,7 +13,10 @@ export default class SearchInput extends Component {
     this.searchControlInputRef = createRef();
     this.focus = this.focus.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleInputChanged = _.debounce(this.handleInputChanged.bind(this), 250);
+    this.handleInputChanged = _.debounce(
+      this.handleInputChanged.bind(this),
+      250,
+    );
 
     this.state = {
       value,
@@ -29,10 +32,13 @@ export default class SearchInput extends Component {
     const value = event.target.value;
     const regexValue = new RegExp(_.escapeRegExp(value), 'ig');
 
-    this.setState({
-      value,
-      regexValue,
-    }, this.handleInputChanged);
+    this.setState(
+      {
+        value,
+        regexValue,
+      },
+      this.handleInputChanged,
+    );
   }
 
   handleInputChanged() {
@@ -53,10 +59,7 @@ export default class SearchInput extends Component {
         ref={this.searchControlInputRef}
         {...otherProps}
       >
-        <ActionInput.Left
-          icon="search"
-          onClick={_.noop}
-        />
+        <ActionInput.Left icon="search" onClick={_.noop} />
       </ActionInput>
     );
   }

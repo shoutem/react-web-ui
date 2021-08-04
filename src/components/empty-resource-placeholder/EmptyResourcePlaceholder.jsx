@@ -13,22 +13,22 @@ export default function EmptyResourcePlaceholder({
   children,
 }) {
   const classNameMap = classNames('empty-placeholder', className);
-  const imageStyle = _.isObject(imageSize) ? imageSize : { width: imageSize, height: imageSize };
+  const imageStyle = _.isObject(imageSize)
+    ? imageSize
+    : { width: imageSize, height: imageSize };
 
   return (
     <div className={classNameMap}>
-      {imageSrc &&
+      {imageSrc && (
         <img
           src={imageSrc}
           srcSet={imageSrcSet}
           role="presentation"
           style={imageStyle}
         />
-      }
+      )}
       <h2>{title}</h2>
-      <div className="empty-placeholder__content">
-        {children}
-      </div>
+      <div className="empty-placeholder__content">{children}</div>
     </div>
   );
 }

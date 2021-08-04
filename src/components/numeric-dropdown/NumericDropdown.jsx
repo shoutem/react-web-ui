@@ -31,12 +31,12 @@ export default class NumericDropdown extends Component {
 
     return (
       <Dropdown className="block" onSelect={onChange}>
-        <Dropdown.Toggle>
-          {value}
-        </Dropdown.Toggle>
+        <Dropdown.Toggle>{value}</Dropdown.Toggle>
         <Dropdown.Menu>
-          {_.map(numberOptions, (key) => (
-            <MenuItem key={key} eventKey={key}>{key}</MenuItem>
+          {_.map(numberOptions, key => (
+            <MenuItem key={key} eventKey={key}>
+              {key}
+            </MenuItem>
           ))}
         </Dropdown.Menu>
       </Dropdown>

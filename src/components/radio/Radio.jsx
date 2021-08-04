@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Radio as ReactBootstrapRadio } from 'react-bootstrap';
 import classNames from 'classnames';
 
@@ -14,3 +15,9 @@ export default function Radio(props) {
     </ReactBootstrapRadio>
   );
 }
+
+Radio.propTypes = {
+  className: PropTypes.string,
+  checked: PropTypes.bool,
+  children: PropTypes.node,
+};

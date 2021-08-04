@@ -57,8 +57,10 @@ class NestedSortable extends Component {
       return;
     }
 
-    if (nextProps.selectedId !== this.props.selectedId ||
-      !_.isEqual(this.props.tree, nextProps.tree)) {
+    if (
+      nextProps.selectedId !== this.props.selectedId ||
+      !_.isEqual(this.props.tree, nextProps.tree)
+    ) {
       this.updateStateWithProps(nextProps);
     }
   }
@@ -68,7 +70,10 @@ class NestedSortable extends Component {
     const { tree, selectedId } = props;
     const nodes = this.createNodeMap(tree);
     const nodeParents = this.createParentNodeMap(tree);
-    const selectedNodePredecessors = this.calculateNodePredecessors(selectedId, nodeParents);
+    const selectedNodePredecessors = this.calculateNodePredecessors(
+      selectedId,
+      nodeParents,
+    );
 
     this.setState({
       tree,
@@ -130,11 +135,15 @@ class NestedSortable extends Component {
       return {};
     }
 
-    return _.reduce(nodes, (result, node) => ({
-      ...result,
-      [node.id]: node,
-      ...this.createNodeMap(node.children),
-    }), {});
+    return _.reduce(
+      nodes,
+      (result, node) => ({
+        ...result,
+        [node.id]: node,
+        ...this.createNodeMap(node.children),
+      }),
+      {},
+    );
   }
 
   createParentNodeMap(nodes, parentId) {
@@ -142,18 +151,22 @@ class NestedSortable extends Component {
       return {};
     }
 
-    return _.reduce(nodes, (result, node) => {
-      const newResult = {
-        ...result,
-        ...this.createParentNodeMap(node.children, node.id),
-      };
+    return _.reduce(
+      nodes,
+      (result, node) => {
+        const newResult = {
+          ...result,
+          ...this.createParentNodeMap(node.children, node.id),
+        };
 
-      if (parentId) {
-        newResult[node.id] = parentId;
-      }
+        if (parentId) {
+          newResult[node.id] = parentId;
+        }
 
-      return newResult;
-    }, {});
+        return newResult;
+      },
+      {},
+    );
   }
 
   calculateNodePredecessors(nodeId, nodeParents) {
@@ -177,7 +190,7 @@ class NestedSortable extends Component {
     dragIndex,
     hoverParentNode,
     hoverIndex,
-    levelChange = 0
+    levelChange = 0,
   ) {
     // Checks if all conditions for moving node into nestable node are satisfied
     // and if are, returns destination object that will move node to tail of it's previous
@@ -186,7 +199,9 @@ class NestedSortable extends Component {
     // it's not collapsed.
     if (levelChange < 0 && dragParentNode && dragIndex > 0) {
       const previousSiblingNode = dragParentNode.children[dragIndex - 1];
-      const isPreviousSiblingNodeCollapsed = this.state.collapsed[previousSiblingNode.id];
+      const isPreviousSiblingNodeCollapsed = this.state.collapsed[
+        previousSiblingNode.id
+      ];
       if (previousSiblingNode.isNestable && !isPreviousSiblingNodeCollapsed) {
         return {
           parentNode: previousSiblingNode,
@@ -204,9 +219,13 @@ class NestedSortable extends Component {
       // only last child in nestable node can be dragged one level-up
       const isLast = dragParentNode.children.length === dragIndex + 1;
       const grandParentNodeId = this.state.nodeParents[dragParentNode.id];
-      const grandParentNode = grandParentNodeId && this.state.nodes[grandParentNodeId];
+      const grandParentNode =
+        grandParentNodeId && this.state.nodes[grandParentNodeId];
       if (isLast && grandParentNode) {
-        const parentIndex = _.findIndex(grandParentNode.children, ['id', dragParentNode.id]);
+        const parentIndex = _.findIndex(grandParentNode.children, [
+          'id',
+          dragParentNode.id,
+        ]);
         return {
           parentNode: grandParentNode,
           index: parentIndex + 1,
@@ -226,9 +245,15 @@ class NestedSortable extends Component {
     const { tree } = this.state;
 
     // Root nodes have sourceNode undefined, so we use tree as reference to root elements
-    const node = sourceNode ? sourceNode.children[sourceIndex] : tree[sourceIndex];
+    const node = sourceNode
+      ? sourceNode.children[sourceIndex]
+      : tree[sourceIndex];
     const sourceNodeChildren = _.get(sourceNode, 'children', tree);
-    const destinationNodeChildren = _.get(destination, 'parentNode.children', tree);
+    const destinationNodeChildren = _.get(
+      destination,
+      'parentNode.children',
+      tree,
+    );
 
     // Moving node by update parents children array
     sourceNodeChildren.splice(sourceIndex, 1);
@@ -238,7 +263,13 @@ class NestedSortable extends Component {
     this.setState({ tree });
   }
 
-  moveNode(dragParentId, dragIndex, hoverParentId, hoverIndex, levelChange = 0) {
+  moveNode(
+    dragParentId,
+    dragIndex,
+    hoverParentId,
+    hoverIndex,
+    levelChange = 0,
+  ) {
     // Find parent nodes based on ids
     const dragParentNode = this.state.nodes[dragParentId];
     const hoverParentNode = this.state.nodes[hoverParentId];
@@ -251,7 +282,7 @@ class NestedSortable extends Component {
       dragIndex,
       hoverParentNode,
       hoverIndex,
-      levelChange
+      levelChange,
     );
 
     // Cancel move if destination is not feasible
@@ -272,12 +303,12 @@ class NestedSortable extends Component {
   render() {
     const nestedSortableClasses = classNames(
       this.props.className,
-      'nested-sortable'
+      'nested-sortable',
     );
 
     return (
       <div className={nestedSortableClasses}>
-        {this.state.tree.map((item, i) =>
+        {this.state.tree.map((item, i) => (
           <NodeDraggable
             key={item.id}
             item={item}
@@ -302,7 +333,7 @@ class NestedSortable extends Component {
             step={this.props.step}
             showDragHandle={this.props.showDragHandle}
           />
-        )}
+        ))}
       </div>
     );
   }
@@ -310,17 +341,19 @@ class NestedSortable extends Component {
 
 NestedSortable.propTypes = {
   className: PropTypes.string,
-  tree: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    isNestable: PropTypes.bool,
-    hasUpdates: PropTypes.bool,
-    isDraggable: PropTypes.bool,
-    isRoot: PropTypes.bool,
-    disableDrop: PropTypes.bool,
-    children: PropTypes.array,
-    // Node can hold additional attributes that will be used in combination
-    // with nodeHeaderTemplate function
-  })).isRequired,
+  tree: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      isNestable: PropTypes.bool,
+      hasUpdates: PropTypes.bool,
+      isDraggable: PropTypes.bool,
+      isRoot: PropTypes.bool,
+      disableDrop: PropTypes.bool,
+      children: PropTypes.array,
+      // Node can hold additional attributes that will be used in combination
+      // with nodeHeaderTemplate function
+    }),
+  ).isRequired,
   selectedId: PropTypes.string,
   onSelect: PropTypes.func,
   nodeHeaderTemplate: PropTypes.func,

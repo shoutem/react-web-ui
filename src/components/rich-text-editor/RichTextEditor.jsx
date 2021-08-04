@@ -56,6 +56,7 @@ export default class RichTextEditor extends Component {
 
   render() {
     const {
+      // eslint-disable-next-line no-unused-vars
       onChange,
       enableImageFormatting,
       enableImageAlign,

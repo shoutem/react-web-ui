@@ -4,11 +4,7 @@ import _ from 'lodash';
 import classNames from 'classnames';
 
 export default function FontIcon({ className, name, size, ...props }) {
-  const classNameMap = classNames(
-    className,
-    'se-icon',
-    `se-icon-${name}`
-  );
+  const classNameMap = classNames(className, 'se-icon', `se-icon-${name}`);
 
   const style = {
     fontSize: size,
@@ -16,9 +12,7 @@ export default function FontIcon({ className, name, size, ...props }) {
 
   const otherProps = _.omit(props, ['bsStyle', 'bsRole']);
 
-  return (
-    <span {...otherProps} style={style} className={classNameMap} />
-  );
+  return <span {...otherProps} style={style} className={classNameMap} />;
 }
 
 FontIcon.propTypes = {

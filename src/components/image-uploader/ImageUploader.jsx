@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { HelpBlock } from 'react-bootstrap';
 import Dropzone from 'react-dropzone';
 import classNames from 'classnames';
-import { LoaderContainer } from '../loader'
+import { LoaderContainer } from '../loader';
 import ImagePreview from '../image-preview';
 import { imageSizeTooBigError, imageUploadError } from './errors';
 import {

@@ -51,15 +51,14 @@ export default class NodeHeader extends Component {
   }
 
   renderHandle() {
-    const nodeHandleClasses = classNames(
-      'nested-sortable__node-handle',
-      {
-        'is-locked': !this.props.isDraggable,
-      }
-    );
+    const nodeHandleClasses = classNames('nested-sortable__node-handle', {
+      'is-locked': !this.props.isDraggable,
+    });
 
     return (
-      <div><FontIcon name="drag-handle" className={nodeHandleClasses} /></div>
+      <div>
+        <FontIcon name="drag-handle" className={nodeHandleClasses} />
+      </div>
     );
   }
 
@@ -85,7 +84,7 @@ export default class NodeHeader extends Component {
     const { hasUpdates } = this.props;
 
     if (hasUpdates) {
-      return <Dot className='nested-sortable__node-updates-dot' />;
+      return <Dot className="nested-sortable__node-updates-dot" />;
     }
 
     return null;
@@ -104,27 +103,24 @@ export default class NodeHeader extends Component {
       level,
       step,
       offset,
-      showDragHandle
+      showDragHandle,
     } = this.props;
 
     const isDraggingGreedy = isDragging || isParentDragging;
 
-    const nodeHeaderClasses = classNames(
-      'nested-sortable__node-header',
-      {
-        'is-selected': isSelected(item.id) && !isDraggingGreedy,
-        'is-hover': isHovered(item.id) && !isDraggingGreedy,
-        'is-select-disabled': !canSelect,
-        'has-drag-handle': showDragHandle,
-      }
-    );
+    const nodeHeaderClasses = classNames('nested-sortable__node-header', {
+      'is-selected': isSelected(item.id) && !isDraggingGreedy,
+      'is-hover': isHovered(item.id) && !isDraggingGreedy,
+      'is-select-disabled': !canSelect,
+      'has-drag-handle': showDragHandle,
+    });
 
     const nodePlaceholderClasses = classNames(
       'nested-sortable__node-placeholder',
       {
         'is-dragging': isDraggingGreedy,
         'is-horizontal': isHorizontal,
-      }
+      },
     );
 
     return (

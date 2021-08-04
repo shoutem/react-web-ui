@@ -69,6 +69,7 @@ export default class Paging extends Component {
     this.checkData(nextProps, this.props);
   }
 
+  // eslint-disable-next-line react/sort-comp
   checkData(nextProps, props = {}) {
     const {
       limit: nextLimit,
@@ -78,11 +79,10 @@ export default class Paging extends Component {
 
     const { limit, offset, itemCount } = props;
 
-    const pagingHasChanged = (
+    const pagingHasChanged =
       nextLimit !== limit ||
       nextOffset !== offset ||
-      nextItemCount !== itemCount
-    );
+      nextItemCount !== itemCount;
 
     if (pagingHasChanged) {
       const pageIndex = calculatePageIndex(nextLimit, nextOffset);
@@ -138,7 +138,7 @@ export default class Paging extends Component {
       return hasNext;
     }
 
-    return !pageCount || (pageIndex + 1) < pageCount;
+    return !pageCount || pageIndex + 1 < pageCount;
   }
 
   handlePreviousPageClick() {

@@ -36,14 +36,15 @@ class ActionInput extends Component {
     }
   }
 
-  focus() {
-    findDOMNode(this.actionInputControl.current).focus();
+  getComponent(children, key) {
+    return _.find(
+      React.Children.toArray(children),
+      component => component.type.side === key,
+    );
   }
 
-  getComponent(children, key) {
-    return _.find(React.Children.toArray(children), component => (
-      component.type.side === key
-    ));
+  focus() {
+    findDOMNode(this.actionInputControl.current).focus();
   }
 
   updateComponentsFromProps(children) {
@@ -54,12 +55,8 @@ class ActionInput extends Component {
   }
 
   render() {
-    const {
-      className,
-      debounceTimeout,
-      children,
-      ...otherProps,
-    } = this.props;
+    // eslint-disable-next-line no-unused-vars
+    const { className, debounceTimeout, children, ...otherProps } = this.props;
 
     const hasLeftComponent = !!this.state.leftActionComponent;
     const hasRightComponent = !!this.state.rightActionComponent;
