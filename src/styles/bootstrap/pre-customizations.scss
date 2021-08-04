@@ -1,0 +1,62 @@
+/* Colors */
+$brand-primary: #444f6c;
+
+/* Scaffolding */
+$text-color: #444f6c;
+$link-color: #444f6c;
+$text-color: #444f6c;
+$link-hover-decoration: none;
+
+/* Typography */
+$font-family-base: MuseoSans, sans-serif;
+$font-family-sans-serif: MuseoSans;
+$font-size-base: 14px !default;
+$headings-font-weight: 300;
+$font-size-h1: 48px;
+$font-size-h2: 24px;
+$font-size-h3: 18px;
+$font-size-h4: 15px;
+$font-size-h5: 12px;
+$font-size-h6: 11px;
+
+/* Icons */
+$icon-font-path: "";
+
+/* Buttons */
+$btn-warning-color: rgb(51, 51, 51);
+
+/* Forms */
+$input-color: #444f6c;
+$input-bg: rgba(228, 230, 233, 0.4);
+$input-border-radius: 0px;
+
+/* Dropdowns */
+$dropdown-link-hover-bg: #ECF9FD;
+
+/* Grid system */
+$grid-gutter-width: 24px;
+
+/* Navbar */
+$navbar-border-radius: 0;
+$navbar-default-bg: #fff;
+$navbar-default-color: #444f6c;
+$navbar-default-link-color: #444f6c;
+$navbar-default-link-active-color: #444f6c;
+$navbar-default-link-hover-color: #444f6c;
+$navbar-height: 64px;
+$navbar-margin-bottom: 0;
+$navbar-padding-vertical: 22px;
+
+/* Tabs */
+$nav-tabs-border-color: #E4E6E9;
+$nav-tabs-link-hover-border-color: transparent;
+$nav-tabs-active-link-hover-border-color: transparent;
+$nav-tabs-justified-link-border-color: transparent;
+$nav-tabs-justified-active-link-border-color: transparent;
+
+/* Modals */
+$modal-header-border-color: #fff;
+$modal-inner-padding: 18px;
+$modal-title-padding: 18px;
+$modal-lg: 940px;
+$modal-sm: 420px;

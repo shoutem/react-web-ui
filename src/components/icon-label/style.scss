@@ -1,0 +1,31 @@
+.icon-label {
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display:flex;
+  align-items: center;
+}
+
+.icon-label__icon {
+  font-size:24px;
+  color: #bdc0cb;
+  transition: color 0.1s linear;
+
+  &.is-left {
+    margin-right:16px;
+  }
+
+  &.is-right {
+    margin-left:auto;
+  }
+}
+
+:hover > .icon-label > .icon-label__icon {
+  color: #444f6c;
+}
+
+.icon-label__label {
+  font-size:14px;
+  color:#444f6c;
+}

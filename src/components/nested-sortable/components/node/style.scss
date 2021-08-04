@@ -1,0 +1,100 @@
+.nested-sortable__node {
+  margin: 0;
+  user-select: none;
+  cursor: pointer;
+  text-indent: inherit;
+
+  &.is-horizontal {
+    display: inline-block;
+  }
+
+  &.is-dragging {
+    text-indent: -999999px;
+  }
+}
+
+.nested-sortable__node-header {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  color: #7b8397;
+  background-color: #ffffff;
+  transition: all 0.2s;
+
+  &.is-selected {
+    background-color: #dadce2;
+  }
+
+  &.is-select-disabled {
+    cursor: default;
+  }
+
+  &.is-hover {
+    &:not(.is-selected) {
+      background-color: rgba(0, 170, 223, 0.1);
+      color: #444f6c;
+    }
+  }
+
+  &.has-drag-handle,
+  &.is-hover {
+    .nested-sortable__node-handle {
+      visibility: visible;
+      color: #7b8397;
+      cursor: move;
+    }
+  }
+
+  &.is-hover{
+    .nested-sortable__node-handle.is-locked {
+      visibility: hidden;
+    }
+  }
+
+  &.has-drag-handle{
+    .nested-sortable__node-handle.is-locked {
+      display: none;
+    }
+  }
+}
+
+.nested-sortable__node-placeholder {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  &.is-dragging {
+    &:not(.is-horizontal) {
+      margin-left: 24px;
+    }
+    background-color: rgba(91, 192, 222, 0.22);
+  }
+}
+
+.nested-sortable__node-handle {
+  visibility: hidden;
+  font-size: 24px;
+  width: 24px;
+  text-align: center;
+}
+
+.nested-sortable__node-caret {
+  margin-left: auto;
+  margin-right: 16px;
+  top: 0;
+  font-size: 10px;
+}
+
+.nested-sortable__node-children {
+  &.is-collapsed {
+    display:none;
+  }
+}
+
+.nested-sortable__node-updates-dot {
+  margin-left: 5px;
+  margin-bottom: 10px;
+  background-color: #f5a623;
+}

@@ -1,0 +1,71 @@
+@import "../../styles/colors";
+
+.switch__button {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 19px;
+
+  input[type=checkbox] {
+    display: none;
+  }
+
+  input[type=checkbox] ~ label {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  input[type=checkbox] ~ .switch__knob {
+    background: $color-grayish;
+  }
+
+  input[type=checkbox]:checked {
+    ~ .switch__knob {
+      background-color: $color-pea-green;
+      transform: translateX(100%);
+    }
+    ~ .switch__knob-background {
+      background-color: $color-pea-green;
+    }
+  }
+}
+
+.switch__knob {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  pointer-events: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.switch__knob-background {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  background-color: $color-grayish;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.switch-form-group {
+  .control-label {
+    padding-top: 16px;
+  }
+
+  .switch {
+    float: right;
+  }
+
+  .switch__button {
+    margin-top: 16px;
+    margin-right: 16px;
+  }
+}

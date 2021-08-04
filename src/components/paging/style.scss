@@ -1,0 +1,33 @@
+.paging {
+  .paging__description {
+    padding: 0 12px;
+    color: #888fa1;
+    font-size: 13px;
+    word-spacing: 8px;
+  }
+
+  .paging__item {
+    a {
+      padding: 0 4px;
+      border: none;
+      border-radius: 0;
+
+      .se-icon {
+        vertical-align: middle;
+      }
+
+      &:hover,
+      &:focus {
+        background: none;
+      }
+    }
+
+    &.left a {
+      border-right: 1px solid #e4e6e9
+    }
+
+    &.right a {
+      border-left: 1px solid #e4e6e9;
+    }
+  }
+}

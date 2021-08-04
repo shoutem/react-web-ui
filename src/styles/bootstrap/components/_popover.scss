@@ -1,0 +1,25 @@
+.popover {
+  background-color: $color-white;
+  border: none;
+  border-radius: 0;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
+}
+
+.popover-content {
+  padding: 16px;
+}
+
+.popover {
+  &.top > .arrow {
+    border-top-color: rgba(0, 0, 0, 0.06);
+  }
+  &.right > .arrow {
+    border-right-color: rgba(0, 0, 0, 0.06);
+  }
+  &.bottom > .arrow {
+    border-bottom-color: rgba(0, 0, 0, 0.06);
+  }
+  &.left > .arrow {
+    border-left-color: rgba(0, 0, 0, 0.06);
+  }
+}

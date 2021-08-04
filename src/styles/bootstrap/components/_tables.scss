@@ -1,0 +1,26 @@
+.table {
+  width: 100%;
+  table-layout: fixed;
+  font-size: 13px;
+
+  > thead > tr > th {
+    padding: 14px 0;
+    font-weight: 500;
+    color:#888FA1;
+    border-bottom: none;
+  }
+
+  > tbody > tr {
+    border-bottom: 1px solid #E4E6EA;
+
+    > td {
+      padding: 14px 0;
+      vertical-align: middle;
+    }
+  }
+
+  // Modifies table layout so that it scales based on its column widths
+  &.table-column-fit {
+    width: auto !important;
+  }
+}

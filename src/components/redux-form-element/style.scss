@@ -1,0 +1,15 @@
+.redux-form-element__container {
+  display: flex;
+
+  .form-control {
+    &.with-emoji-picker {
+      padding-right: 40px;
+    }
+  }
+}
+
+.redux-form-element__emoji-icon {
+  cursor: pointer;
+  margin-left: -34px;
+  margin-top: 12px;
+}

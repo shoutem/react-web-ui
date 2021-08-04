@@ -1,0 +1,33 @@
+.inline-modal {
+  &.modal:before {
+    height: inherit;
+    margin-right: 0;
+  }
+
+  .modal-header {
+    min-height: 80px;
+    overflow-y: hidden;
+    padding: 0;
+
+    .btn-icon {
+      margin-top: 40px;
+      margin-right: 16px;
+    }
+  }
+
+  .modal-body {
+    padding: 0;
+  }
+
+  .modal-content {
+    overflow: visible;
+    box-shadow: none;
+    height: 100%;
+  }
+
+  .modal-dialog {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+}

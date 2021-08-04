@@ -1,0 +1,33 @@
+.rich-text-editor__container {
+  .rich-text-editor__emoji-icon {
+    position: absolute;
+    z-index: 6;
+    right: 20px;
+    top: 150px;
+    cursor: pointer;
+  }
+
+  &.no-image-formatting {
+    .sun-editor .se-controller-resizing {
+      display: none !important;
+    }
+  }
+
+  &.no-image-align {
+    .sun-editor .se-dialog .se-dialog-inner .se-dialog-footer > div {
+      display: none;
+    }
+  }
+
+  &.no-image-description {
+    .sun-editor .se-dialog .se-dialog-inner .se-dialog-form-footer > label {
+      display: none;
+    }
+  }
+
+  &.no-video-align {
+    .sun-editor .se-dialog .se-dialog-inner .se-dialog-footer > div {
+      display: none;
+    }
+  }
+}

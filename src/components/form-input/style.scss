@@ -1,0 +1,16 @@
+.form-input__container {
+  display: flex;
+}
+
+.form-control {
+  &.with-emoji-picker {
+    padding-right: 40px;
+  }
+}
+
+.form-input_emoji-icon {
+  margin-left: -24px;
+  right: 10px;
+  top: 12px;
+  cursor: pointer;
+}

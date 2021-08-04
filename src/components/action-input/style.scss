@@ -1,0 +1,32 @@
+.action-input {
+  position: relative;
+
+  .btn {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  &.has-left-icon {
+    .action-input__form {
+      padding-left: 48px;
+    }
+  }
+  &.has-right-icon {
+    .action-input__form {
+      padding-right: 48px;
+    }
+  }
+}
+
+.action-input__left-button {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.action-input__right-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}

@@ -1,0 +1,93 @@
+.h1, h1 {
+  font-weight: 100;
+}
+
+.h3, h3 {
+  margin-top: 48px;
+  margin-bottom: 4px;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.h4, h4 {
+  margin-top: 22px;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+p {
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.71;
+  text-align: left;
+  color: $color-waterloo;
+  margin-top: 24px;
+
+  a {
+    border-bottom: solid 1px;
+    cursor: pointer;
+  }
+}
+
+a {
+  font-style: normal;
+  font-stretch: normal;
+  text-align: left;
+  color: $color-fiord;
+}
+
+a.disabled {
+  font-style: normal;
+  font-stretch: normal;
+  text-align: left;
+  color: $color-waterloo;
+}
+
+a.btn {
+  padding-top: 12px;
+}
+
+code {
+  border-radius: 2px;
+  color: #222b35;
+  background-color: #f3f3f3;
+}
+
+pre {
+  font-size: 14px;
+  border: none;
+
+  code {
+    color: #444f6c;
+  }
+}
+
+pre, pre[class*="language-"] {
+  margin-bottom: 40px;
+}
+
+pre[data-line] {
+  padding-left: 1em;
+}
+
+code[class*="language-"], pre[class*="language-"] {
+  text-shadow: none;
+  color: #444f6c;
+  line-height: 24px;
+}
+
+:not(pre)>code[class*="language-"], pre[class*="language-"] {
+  background-color: #f3f3f3;
+}
+
+.promoted {
+  color: #444f6c;
+}
+
+.details {
+  font-size: 13px;
+  line-height: 1.38;
+  color: #888fa1;
+}

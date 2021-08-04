@@ -1,0 +1,25 @@
+.empty-placeholder {
+  user-select: none;
+  margin: auto;
+  width: 500px;
+  cursor: default;
+  text-align: center;
+
+  img {
+    width: 55px;
+  }
+
+  h2 {
+    font-size: 24px;
+    margin: 30px auto 17px;
+  }
+
+  span {
+    color: #7b8397;
+  }
+}
+
+.empty-placeholder__content {
+  width: 283px;
+  margin: auto;
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>1953B4D8-936C-4A7A-B67E-0719F1587991</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#DADCE2" offset="0%"></stop>
+            <stop stop-color="#000000" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="X-Icons/Actions" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icons/Actions/ic-action-expand">
+            <polygon id="Bounds" fill="url(#linearGradient-1)" opacity="0" points="0 0 24 0 24 24 0 24"></polygon>
+            <polygon id="Icon-Shape" fill="#444F6C" points="7 10 12 15 17 10"></polygon>
+        </g>
+    </g>
+</svg>

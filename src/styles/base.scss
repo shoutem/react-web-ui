@@ -1,0 +1,43 @@
+body, html {
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-error {
+  font-size: 12px;
+  line-height: 1.25;
+  color: #d0021b;
+  padding-top: 8px;
+  padding-bottom: 9px;
+}
+
+/** Default colors for text and input selections
+ * Firefox still uses the -moz- prefix (v49 at the moment)
+ */
+::selection {
+  background: rgba(0, 170, 223, 0.1);
+  color: #444F6C;
+}
+
+::-moz-selection {
+  background: rgba(0, 170, 223, 0.1);
+  color: #444F6C;
+}
+
+input::selection {
+  background: #00aadf;
+  color: white;
+}
+
+input::-moz-selection {
+  background: #00aadf;
+  color: white;
+}
+/* / Default colors for text and input selections */

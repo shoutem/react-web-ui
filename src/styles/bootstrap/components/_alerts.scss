@@ -1,0 +1,16 @@
+.alert {
+  border-radius: 4px;
+  width: auto;
+  color: $color-fiord;
+  border: none;
+
+  &.alert-info {
+    border-radius: 4px;
+    background-color: $color-ghost-white;
+  }
+
+  &.alert-info.inverse {
+    background-color: $color-french-gray;
+    color: $color-white;
+  }
+}

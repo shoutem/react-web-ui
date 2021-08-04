@@ -1,0 +1,33 @@
+/* ListGroup */
+
+.list-group {
+  margin: 0;
+}
+
+.list-group-item {
+  border: none;
+  padding: 8px 16px;
+  color: $color-fiord;
+  height: 40px;
+}
+
+.list-group-item:last-child {
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.list-group-item:first-child {
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+}
+
+button.list-group-item {
+  color: #7b8397;
+}
+
+button.list-group-item:hover,
+button.list-group-item:focus {
+  outline: none;
+  background-color: #ecf9fd;
+  color: $color-fiord;
+}

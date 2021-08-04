@@ -1,0 +1,32 @@
+export const editorOptions = {
+  height: 300,
+  defaultTag: 'div',
+  textTags: {
+    strike: 's',
+  },
+  imageRotation: false,
+  mediaAutoSelect: false,
+  videoResizing: false,
+  formats: ['div', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+  imageFileInput: false,
+  linkProtocol: 'https://',
+  buttonList: [
+    ['undo', 'redo', 'removeFormat'],
+    ['-right', 'fullScreen', 'codeView'],
+    '/',
+    [
+      'fontSize',
+      'formatBlock',
+      'bold',
+      'underline',
+      'italic',
+      'strike',
+      'fontColor',
+      'hiliteColor',
+      'outdent',
+      'indent',
+    ],
+    ['align', 'list', 'table'],
+    ['link', 'image', 'video'],
+  ],
+};

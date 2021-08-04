@@ -1,0 +1,21 @@
+.image-label {
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display:flex;
+  align-items: center;
+}
+
+.image-label__img-container {
+  display: inline-block;
+  background-color: #eee;
+
+  &.is-left {
+    margin-right:1em;
+  }
+
+  &.is-right {
+    margin-left:auto;
+  }
+}

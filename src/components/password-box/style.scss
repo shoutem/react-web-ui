@@ -1,0 +1,11 @@
+.password-box {
+  &.show-password {
+    .action-input__right-button {
+      opacity: 0.5;
+    }
+  }
+
+  input[disabled] {
+    opacity: 0.4;
+  }
+}

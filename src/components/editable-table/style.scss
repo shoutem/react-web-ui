@@ -1,0 +1,38 @@
+.editable-table__table {
+  margin-top: 24px;
+
+  &.table > tbody > tr > td {
+    padding: 12px 8px 11px 0;
+  }
+
+  .btn-icon {
+    padding: 0 7px;
+
+    &:hover {
+      color: #888fa1;
+    }
+  }
+
+  &.table {
+    tbody {
+      tr.table-row-text-placeholder {
+        font-size: 13px;
+        text-align: left;
+        opacity: 0.6;
+        border-bottom: none;
+      }
+    }
+  }
+
+  .editable-table-row-cursor {
+    cursor: pointer;
+  }
+
+  .editable-table-cell {
+    text-align: left;
+
+    .form-control-static {
+      margin-top: 0;
+    }
+  }
+}

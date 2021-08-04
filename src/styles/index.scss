@@ -1,0 +1,26 @@
+// Core variables and mixins
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/variables";
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins";
+
+@import './bootstrap/index.scss';
+@import "./react-select/index.scss";
+@import "./react-datetime/index.scss";
+
+@import "./colors.scss";
+@import "./fonts.scss";
+@import "./icons.scss";
+@import "./base.scss";
+
+@import './bootstrap/components/_alerts.scss';
+@import './bootstrap/components/_buttons.scss';
+@import './bootstrap/components/_dropdown.scss';
+@import './bootstrap/components/_form.scss';
+@import './bootstrap/components/_list.scss';
+@import './bootstrap/components/_list-group.scss';
+@import './bootstrap/components/_modal.scss';
+@import './bootstrap/components/_popover.scss';
+@import './bootstrap/components/_tables.scss';
+@import './bootstrap/components/_tabs.scss';
+@import './bootstrap/components/_typography.scss';
+
+@import "./react-select/components/_select.scss";

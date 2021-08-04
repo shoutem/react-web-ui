@@ -1,0 +1,148 @@
+.nav-tabs {
+  box-shadow: inset 0 -1px 0 0 $color-athens-gray;
+  border: none;
+}
+
+.nav-tabs > li {
+  margin-left: 48px;
+  margin-right: 0px;
+  margin-bottom: 0;
+}
+
+.nav-tabs > li:first-child {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.nav-tabs > li:last-child {
+  margin-right: 0;
+}
+
+.nav-tabs > li > a {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 14px 0 15px;
+  margin-right: 0;
+  color: #7b8397;
+  transition: color .4s linear 0s;
+}
+
+.nav-tabs > li > a,
+.nav-tabs > li > a:hover,
+.nav-tabs > li > a:focus {
+  border: 0;
+  background-color: transparent;
+}
+
+.nav-tabs > li > a:hover {
+  color: $color-fiord;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  border: 0;
+  background-color: transparent;
+  color: $color-fiord;
+}
+
+.nav-tabs > li > a::after {
+  content: '';
+  background: $color-azure;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  opacity: 0;
+  transition: width 0.15s, opacity 0.15s;
+}
+
+.nav-tabs > li.active > a::after {
+  width: 100%;
+  opacity: 1.0;
+}
+
+.nav-tabs.nav-stacked {
+  padding: 48px;
+
+  > li,
+  > li > a {
+    width: 100%;
+    letter-spacing: 0.5px
+  }
+
+  > li > a::after {
+    top: 8px;
+    left: auto;
+    right: 0;
+    height: 0;
+    width: 3px;
+    transition: height 0.15s, opacity 0.15s;
+  }
+
+  > li.active > a::after {
+    height: 32px;
+  }
+}
+
+.centered {
+  .nav-tabs > li {
+    float: none;
+    display: inline-block;
+  }
+
+  .nav-tabs {
+    text-align: center;
+    margin: auto;
+    width: 100%;
+  }
+}
+
+.modal {
+  .nav-tabs {
+    margin-top: 8px;
+    padding: 0 54px;
+    box-shadow: none;
+  }
+
+  .nav-tabs.nav-stacked {
+    padding: 48px;
+  }
+
+  .tab-content {
+    overflow-y: auto;
+    padding: 32px 54px;
+  }
+
+  .hide-nav {
+    .tab-content {
+      padding: 0px;
+    }
+    .nav-tabs {
+      display: none;
+    }
+  }
+
+  .modal-lg {
+    .nav-tabs > li > a {
+      text-transform: none;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0;
+    }
+
+    .tab-content {
+      background-color: #f4f4f6;
+      min-height: 520px;
+    }
+  }
+}
+
+.scrollable-tabs {
+  .nav-tabs {
+    box-shadow: inset 0 -1px 0 0 #f4f4f6;
+  }
+}

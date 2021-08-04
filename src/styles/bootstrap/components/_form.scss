@@ -1,0 +1,270 @@
+.form-group {
+  margin-bottom: 0px;
+
+  .form-control {
+    padding-left: 12px;
+    padding-right: 21px;
+    height: 48px;
+    font-weight: 500;
+    font-size: 14px;
+    box-shadow: inset 0 -1px 0 0 rgba(68, 79, 108, 0.3);  /* $color-fiord @ 0.3 opacity*/
+    border: none;
+
+    &:focus {
+      box-shadow: inset 0 -2px 0 0 $color-azure;
+    }
+
+    &[readonly] {
+      box-shadow: none;
+    }
+  }
+
+  .form-control-description {
+    padding-top: 13px;
+    line-height: 1.71;
+    color: #7b8397;
+  }
+
+  .form-control-static {
+    padding-top: 15px;
+    padding-bottom: 14px;
+  }
+
+  .help-block {
+    font-size: 12px;
+    line-height: 1.25;
+    margin: 8px 0;
+
+    .text-error {
+      display: none;
+    }
+  }
+
+  &.has-error {
+    .form-control {
+      background-color: rgba(228, 230, 233, 0.4);
+      box-shadow: inset 0 -2px 0 0 $color-monza;
+    }
+
+    .help-block {
+      color: $color-monza;
+
+      .text-error {
+        display: block;
+      }
+    }
+
+    .control-label {
+      color: $color-french-gray;
+    }
+  }
+
+  &.has-success {
+    .control-label,
+    .help-block {
+      color: $color-french-gray;
+    }
+  }
+}
+
+.control-label {
+  padding-top: 24px;
+  padding-bottom: 8px;
+  margin-bottom: 0;
+  padding-left: 0;
+  height: 48px;
+  font-weight: 500;
+  font-size: 13px;
+  color: $color-french-gray;
+}
+
+// Obsolete React bootstrap style
+// kept for backward compatibility
+.radio,
+.checkbox {
+  margin: 0;
+  padding-top: 15px;
+  min-height: 48px;
+
+  label {
+    padding-left: 28px;
+  }
+}
+
+.radio,
+.radio-inline
+{
+  input[type='radio'] {
+    width: 0;
+    height: 0;
+    outline: none;
+    -webkit-appearance: none;
+
+    &::before {
+      display: inline-block;
+      content: '';
+      width: 24px;
+      height: 24px;
+      margin-left: -10px;
+      margin-top: -8px;
+    }
+
+    &:checked::before {
+      // Correct path is actually:
+      // ./../../../img/ic-action-radio-on.svg
+      // Below path is required in dependant module
+      background: url(./../img/ic-action-radio-on.svg) left 0 no-repeat;
+    }
+
+    &:not(:checked)::before {
+      // Correct path is actually:
+      // ./../../../img/ic-action-radio-off.svg
+      // Below path is required in dependant module
+      background: url(./../img/ic-action-radio-off.svg) left 0 no-repeat;
+    }
+  }
+}
+
+.radio-inline {
+  width: 100%;
+  padding: 15px 0px 14px 32px;
+
+  + .radio-inline {
+    margin-left: 24px;
+  }
+}
+
+.checkbox {
+  input[type='checkbox'] {
+    width: 0;
+    height: 0;
+    outline: none;
+    -webkit-appearance: none;
+
+    &::before {
+      display: inline-block;
+      content: '';
+      width: 24px;
+      height: 24px;
+      margin-left: -11px;
+      margin-top: -7px;
+    }
+
+    &:checked::before {
+      // Correct path is actually:
+      // ./../../../img/ic-action-checkbox-on.svg
+      // Below path is required in dependant module
+      background: url(./../img/ic-action-checkbox-on.svg) left 0 no-repeat;
+    }
+
+    &:not(:checked)::before {
+      // Correct path is actually:
+      // ./../../../img/ic-action-checkbox-off.svg
+      // Below path is required in dependant module
+      background: url(./../img/ic-action-checkbox-off.svg) left 0 no-repeat;
+    }
+  }
+}
+// / Obsolete React bootstrap style
+
+.radio.se-radio,
+.checkbox.se-checkbox {
+  label {
+    padding-left: 0;
+  }
+}
+
+.radio.se-radio,
+.radio-inline.se-radio {
+  input[type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: initial;
+    height: initial;
+    outline: initial;
+    -webkit-appearance: initial;
+
+    &::before {
+      display: none;
+    }
+
+    &:checked + .radio-icon {
+      background: url('./../img/ic-action-radio-on.svg') left 0 no-repeat;
+    }
+  }
+
+  .radio-icon {
+    display: inline-block;
+    content: "";
+    width: 32px;
+    height: 24px;
+    position: relative;
+    top: 7px;
+    left: 0;
+    background: url('./../img/ic-action-radio-off.svg') left 0 no-repeat;
+  }
+}
+
+.checkbox.se-checkbox,
+.checkbox-inline.se-checkbox {
+  input[type=checkbox] {
+    position: absolute;
+    opacity: 0;
+    width: initial;
+    height: initial;
+    outline: initial;
+    -webkit-appearance: initial;
+
+    &::before {
+      display: none;
+    }
+
+    &:checked + .checkbox-icon {
+      background: url('./../img/ic-action-checkbox-on.svg') left 0 no-repeat;
+    }
+  }
+
+  .checkbox-icon {
+    display: inline-block;
+    content: "";
+    width: 32px;
+    height: 24px;
+    position: relative;
+    top: 7px;
+    left: 0;
+    background: url('./../img/ic-action-checkbox-off.svg') left 0 no-repeat;
+  }
+}
+
+.dropdown-toggle.btn {
+  letter-spacing: normal;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: none;
+}
+
+.checkbox-inline.disabled,
+.checkbox.disabled label,
+.radio-inline.disabled,
+.radio.disabled label,
+fieldset[disabled] .checkbox-inline,
+fieldset[disabled] .checkbox label,
+fieldset[disabled] .radio-inline,
+fieldset[disabled] .radio label,
+fieldset[disabled] input[type=checkbox],
+fieldset[disabled] input[type=radio],
+input[type=checkbox].disabled,
+input[type=checkbox][disabled],
+input[type=radio].disabled,
+input[type=radio][disabled],
+input[type=text].disabled,
+input[type=text][disabled],
+textarea[type=text].disabled,
+textarea[type=text][disabled] {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.help-block.text-error {
+  padding: 0;
+}

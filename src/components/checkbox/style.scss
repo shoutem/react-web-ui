@@ -1,0 +1,15 @@
+.checkbox-children {
+  color: #444f6c;
+  flex: 1;
+}
+
+.checkbox.se-checkbox label {
+  display: flex;
+  align-items: flex-start;
+}
+
+.checkbox.se-checkbox .checkbox-icon {
+  top: 0px;
+  width: 36px;
+}
+

@@ -1,0 +1,116 @@
+/* Dropdown */
+.dropdown {
+  &.disabled {
+    .dropdown-toggle {
+      opacity: 0.5;
+      cursor: default;
+    }
+  }
+}
+
+.dropdown-toggle.btn {
+  text-transform: none;
+  min-height: 48px;
+}
+
+.dropdown-toggle.btn-default {
+  border-radius: 0;
+  background-color: $color-porcelain;
+  border-color: $color-porcelain;
+  padding: 8px 48px 8px 12px;
+  box-shadow: inset 0 -1px 0 0 rgba(68, 79, 108, 0.15);
+  text-align: left;
+  @extend .text-ellipsis;
+
+  .caret {
+    position: absolute;
+    background-image: url(./../img/ic-action-expand.svg);
+    width: 24px;
+    height: 24px;
+    right: 12px;
+    top: 12px;
+    bottom: 12px;
+    border: none;
+  }
+}
+
+.dropdown-menu {
+  border: none;
+  border-radius: 2px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24),
+              0 0 2px 0 rgba(0, 0, 0, 0.12);
+  padding: 4px 0;
+  top: -4px;
+  min-width: 204px;
+
+  .dropdown-header {
+    font-size: 13px;
+    padding: 12px 24px 12px 12px;
+    color: #8f95a7;
+  }
+
+  .divider {
+    margin: 3px 12px;
+  }
+
+  li {
+    > a {
+      background-color: transparent;
+      padding: 12px;
+      min-height: 48px;
+      transition: background-color 0.2s linear;
+      white-space: normal;
+      overflow: hidden;
+      word-wrap: break-word;
+      > div {
+        height: 24px;
+      }
+    }
+  }
+}
+
+.dropdown.with-header {
+  .dropdown-header {
+    color: $color-fiord;
+    padding: 16px 24px 16px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+  }
+  .divider {
+    margin-left: 0;
+    margin-right: 0;
+    height: 1px;
+    background-color: $color-athens-gray;
+  }
+}
+
+.dropdown.block,
+.dropup.block {
+  width: 100%;
+
+  .dropdown-toggle, .dropdown-menu {
+    width: 100%;
+    text-align: left;
+  }
+}
+
+.dropdown-toggle-more {
+  border: none;
+  padding: 0;
+  background-color: $color-white;
+
+  &:hover {
+    background-color: $color-white;
+    color: $color-azure;
+  }
+
+  &:active,
+  &:focus,
+  &:active:focus {
+    background-color: $color-white;
+    border: 0;
+    box-shadow: none;
+  }
+}

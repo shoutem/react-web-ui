@@ -1,0 +1,219 @@
+/* Buttons */
+.btn {
+  min-width: 120px;
+  min-height: 40px;
+  padding-top: 7px;
+  padding-left: 16px;
+  padding-right: 16px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1px;
+  border-radius: 4px;
+  border: none;
+  word-break: break-all;
+  overflow: hidden;
+  transition: background-color 0.2s linear, border-color 0.2s linear, color 0.2s linear;
+
+  &.btn-lg {
+    padding: 16px 12px 15px;
+  }
+
+  &[disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.btn:focus, .btn:active, a:focus, a:active {
+  outline: none !important;
+  box-shadow: none;
+}
+
+.btn-default {
+  background-color: rgba(68, 79, 108, 0.2);
+  color: $color-fiord;
+
+  &:hover, &:active, &:focus, &:active:hover, &:active:focus {
+    background-color: rgba(68, 79, 108, 0.3);
+  }
+}
+
+.btn-primary {
+  background-color: $color-fiord;
+  border-color: $color-fiord;
+  color: $color-white;
+
+  &:hover, &:active, &:focus, &:active:hover, &:active:focus {
+    opacity: 1.0;
+    background-color: $color-east-bay;
+    border-color: $color-east-bay;
+  }
+}
+
+.btn-info {
+  background-color: $color-azure;
+  border-color: $color-azure;
+  color: $color-white;
+
+  &:hover, &:active, &:focus, &:active:hover, &:active:focus {
+    opacity: 1.0;
+    background-color: $color-cerulean;
+    border-color: $color-cerulean;
+    color: $color-white;
+  }
+}
+
+.btn-danger {
+  background-color: $color-monza;
+  border-color: $color-monza;
+  color: $color-white;
+
+  &:hover, &:active, &:focus, &:active:hover, &:active:focus {
+    opacity: 1.0;
+    background-color: $color-red;
+    border-color: $color-red;
+    color: $color-white;
+  }
+}
+
+.btn-link {
+  opacity: 0.6;
+  color: $color-warm-grey;
+  transition: opacity 0.3s ease;
+
+  &:hover, &:active, &:focus {
+    opacity: 1.0;
+    color: $color-warm-grey;
+  }
+}
+
+.btn-textual,
+.btn-textual:active,
+.btn-textual:active:focus {
+  background-color: transparent;
+  color: #444f6c;
+  opacity: 0.7;
+  border: none;
+
+  &:hover,
+  &:active,
+  &:focus,
+  &:active:hover,
+  &:active:focus {
+    background-color: transparent;
+    color: #444f6c;
+    opacity: 1.0;
+    border: none;
+  }
+}
+
+.btn-rounded {
+  border-radius: 18px;
+
+  &.btn-lg {
+    border-radius: 24px;
+  }
+
+  &.btn-sm {
+    border-radius: 14px;
+  }
+
+  &.btn-xs {
+    border-radius: 14px;
+  }
+}
+
+.btn-ghost {
+  box-shadow: none;
+  background: transparent;
+  transition: all 0.3s ease;
+
+  &.btn-primary {
+    border-width: 2px;
+    color: $brand-primary;
+
+    &:hover, &:active, &:focus, &:active:hover, &:active:focus {
+      background-color: $brand-primary;
+      color: white;
+      opacity : 1.0;
+    }
+  }
+
+  &.btn-warning {
+    border-width: 2px;
+    color: $brand-warning;
+
+    &:hover, &:active, &:focus, &:active:hover, &:active:focus {
+      background-color: $brand-warning;
+      color: $color-light-black;
+      opacity : 1.0;
+    }
+  }
+
+  &.btn-success {
+    border-width: 2px;
+    color: $brand-success;
+
+    &:hover, &:active, &:focus, &:active:hover, &:active:focus {
+      background-color: $brand-success;
+      color: white;
+      opacity : 1.0;
+    }
+  }
+
+  &.btn-info {
+    border-width: 2px;
+    color: $brand-info;
+
+    &:hover, &:active, &:focus, &:active:hover, &:active:focus {
+      background-color: $brand-info;
+      color: white;
+      opacity : 1.0;
+    }
+  }
+
+  &.btn-danger {
+    border-width: 2px;
+    color: $brand-danger;
+
+    &:hover, &:active, &:focus, &:active:hover, &:active:focus {
+      background-color: $brand-danger;
+      color: white;
+      opacity : 1.0;
+    }
+  }
+}
+
+.btn-icon {
+  min-width: 0px;
+  padding: 0;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  transition: color 0.3s ease;
+
+  &:hover, &:active, &:focus, &:active:hover, &:active:focus {
+    background-color: transparent;
+  }
+}
+
+.btn-toolbar {
+  margin-left: -12px;
+
+  & > .btn,
+  & > .btn-group,
+  & > .input-group {
+    margin-left: 12px;
+  }
+
+  &.btn-toolbar-center {
+    text-align: center;
+
+    & > .btn,
+    & > .btn-group,
+    & > .input-group {
+      float: initial;
+    }
+  }
+}

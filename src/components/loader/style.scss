@@ -1,0 +1,124 @@
+.loader {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.circular-loader {
+  width: 48px;
+  height: 48px;
+  opacity: 1;
+  animation: hideshow 2s ease;
+}
+
+.circular-loader__svg {
+  animation: circular-loader__rotate 2s linear infinite 0.1s;
+  transform-origin: center center;
+
+  circle {
+    r: 20;
+    cx: 50;
+    cy: 50;
+    fill: transparent;
+    stroke-width: 3;
+  }
+
+  .circular-loader__circle-path {
+    stroke-miterlimit: 10;
+    stroke: #00aadf;
+  }
+
+  .circular-loader__circle-background {
+    stroke: rgba(0,0,0,.0);
+  }
+}
+
+.circular-loader__circle-path {
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  animation: circular-loader__dash 1.5s ease-in-out infinite 0.1s;
+  stroke-linecap: round;
+}
+
+.btn {
+  .circular-loader {
+    width: 18px;
+    height: 18px;
+  }
+
+  circle {
+    stroke-width: 7px;
+  }
+}
+
+.btn,
+.btn-default,
+.btn-primary,
+.btn-danger,
+.btn-info {
+  .circular-loader__circle-path {
+    stroke: white;
+  }
+}
+
+.btn-default {
+  .circular-loader__circle-background {
+    stroke: #B7BAC4;
+  }
+}
+
+.btn-primary {
+  .circular-loader__circle-background {
+    stroke: #5F6981;
+  }
+}
+
+.btn-danger {
+  .circular-loader__circle-background {
+    stroke: #D7273C;
+  }
+}
+
+.btn-info {
+  .circular-loader__circle-background {
+    stroke: #26B6E3;
+  }
+}
+
+.loader-container.is-overlay {
+  opacity: 0.3;
+  position: relative;
+
+  .circular-loader {
+    position: absolute;
+    top: 45%;
+    left: 45%;
+  }
+}
+
+@keyframes circular-loader__rotate {
+  100%{
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes circular-loader__dash {
+  0%{
+    stroke-dasharray: 1,200;
+    stroke-dashoffset: 0;
+  }
+  50%{
+    stroke-dasharray: 89,200;
+    stroke-dashoffset: -35px;
+  }
+  100%{
+    stroke-dasharray: 89,200;
+    stroke-dashoffset: -124px;
+  }
+}
+
+@keyframes hideshow {
+  0% { opacity: 0; }
+  10% { opacity: 0.1; }
+  15% { opacity: 0.2; }
+  100% { opacity: 1; }
+}

@@ -1,0 +1,26 @@
+.confirm-modal {
+  .modal-footer {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+.confirm-modal__message {
+  color: #7b8397;
+  line-height: 1.71;
+}
+.confirm-modal__error-message {
+  padding-top: 16px;
+}
+
+.confirm-modal__confirm {
+  width: 100%;
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #444f6c;
+
+  .switch__knob-background {
+    z-index:0;
+  }
+}
