@@ -1,6 +1,6 @@
 {
   "name": "@shoutem/react-web-ui",
-  "version": "0.15.1",
+  "version": "0.15.2-rc.0",
   "description": "React UI kit for Shoutem extensions",
   "main": "lib/index.js",
   "files": [
@@ -13,10 +13,16 @@
     "build-dist": "npm run clean-dist && webpack --config ./bin/webpack.config.js",
     "build-lib": "npm run clean-lib && babel src --out-dir lib --copy-files",
     "release": "npm run build && npm publish --access public --tag latest",
+    "release-rc": "npm run build && npm publish --access public --tag rc",
     "lint": "eslint src/**/*.{js,jsx} && eslint test/**/*.js"
   },
   "author": "Shoutem",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shoutem/react-web-ui"
+  },
+  "homepage": "https://github.com/shoutem/react-web-ui#readme",
   "dependencies": {
     "auto-bind": "^4.0.0",
     "bootstrap-sass": "^3.3.6",
