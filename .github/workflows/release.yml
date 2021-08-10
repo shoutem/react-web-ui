@@ -1,0 +1,39 @@
+name: release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release-react-web-ui:
+
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          always-auth: true
+          node-version: '12.16.x'
+          registry-url: https://registry.npmjs.org
+          scope: '@shoutem'
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+          key: npm-deps-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-deps-
+
+      - name: Install Dependencies
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          cd /home/runner/work/shoutem/react-web-ui && npm install
+
+      - name: Lint
+        run: |
+          cd /home/runner/work/shoutem/react-web-ui && npm run lint
+
