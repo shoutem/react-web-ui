@@ -44,6 +44,7 @@
   },
   "devDependencies": {
     "@shoutem/eslint-config-react": "^1.0.1",
+    "@shoutem/redux-api-state": "0.0.13-alpha.1",
     "babel-cli": "^6.5.1",
     "babel-core": "^6.8.0",
     "babel-eslint": "^10.1.0",
