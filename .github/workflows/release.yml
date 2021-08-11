@@ -31,9 +31,9 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          cd /home/runner/work/shoutem/react-web-ui && npm install
+          npm install
 
       - name: Lint
         run: |
-          cd /home/runner/work/shoutem/react-web-ui && npm run lint
+          npm run lint
 
