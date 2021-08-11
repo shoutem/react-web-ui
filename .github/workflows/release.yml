@@ -19,6 +19,14 @@ jobs:
           registry-url: https://registry.npmjs.org
           scope: '@shoutem'
 
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+          key: npm-deps-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-deps-
+
       - name: Install Dependencies
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
