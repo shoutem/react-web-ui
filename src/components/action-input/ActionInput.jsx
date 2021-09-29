@@ -44,7 +44,7 @@ class ActionInput extends Component {
   }
 
   focus() {
-    findDOMNode(this.actionInputControl.current).focus();
+    findDOMNode(this.actionInputControlRef.current).focus();
   }
 
   updateComponentsFromProps(children) {
