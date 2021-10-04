@@ -30,6 +30,7 @@ import Switch from './components/switch';
 import StepIndicator from './components/step-indicator';
 import RichTextEditor from './components/rich-text-editor';
 import EmojiPicker from './components/emoji-picker';
+import ImagePickerModal from './components/image-picker-modal';
 
 export {
   ActionInput,
@@ -48,6 +49,7 @@ export {
   FormInput,
   IconLabel,
   ImageLabel,
+  ImagePickerModal,
   ImagePreview,
   ImageUploader,
   InfoModal,

@@ -22,7 +22,9 @@ export default class EmojiPicker extends Component {
   handleToggleEmojiPicker() {
     const { isPickerShown } = this.state;
 
-    this.setState({ isPickerShown: !isPickerShown }, this.toggleEmojiPicker);
+    this.setState({ isPickerShown: !isPickerShown }, () =>
+      this.toggleEmojiPicker(),
+    );
   }
 
   toggleEmojiPicker() {
@@ -43,7 +45,7 @@ export default class EmojiPicker extends Component {
 
   render() {
     const { isPickerShown } = this.state;
-    const { iconClassName, ...otherProps } = this.props;
+    const { iconClassName, showTogglePickerButton, ...otherProps } = this.props;
 
     const iconClasses = classNames(iconClassName, {
       'emoji-picker__is-active': isPickerShown,
@@ -51,14 +53,16 @@ export default class EmojiPicker extends Component {
 
     return (
       <div>
-        <div>
-          <FontIcon
-            name="emoticon"
-            size="24px"
-            className={iconClasses}
-            onClick={this.handleToggleEmojiPicker}
-          />
-        </div>
+        {showTogglePickerButton && (
+          <div>
+            <FontIcon
+              name="emoticon"
+              size="24px"
+              className={iconClasses}
+              onClick={this.handleToggleEmojiPicker}
+            />
+          </div>
+        )}
         <div>
           {isPickerShown && (
             <Picker title={''} emoji={''} emojiTooltip {...otherProps} />
@@ -70,9 +74,13 @@ export default class EmojiPicker extends Component {
 }
 
 EmojiPicker.propTypes = {
-  ref: PropTypes.object,
   onToggleEmojiPicker: PropTypes.func,
   onSelect: PropTypes.func,
   iconClassName: PropTypes.string,
   style: PropTypes.object,
+  showTogglePickerButton: PropTypes.bool,
+};
+
+EmojiPicker.defaultProps = {
+  showTogglePickerButton: true,
 };

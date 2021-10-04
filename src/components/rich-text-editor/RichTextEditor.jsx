@@ -5,15 +5,18 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
+import { unsplash } from '../../services';
 import EmojiPicker from '../emoji-picker';
-import { editorOptions } from './const';
+import ImagePickerModal from '../image-picker-modal';
+import { resolveEditorOptions } from './const';
+import customPlugins from './customPlugins';
 import './style.scss';
 
 const EMOJI_PICKER_STYLE = {
   position: 'absolute',
   zIndex: 6,
   width: 300,
-  top: 180,
+  top: 183,
   right: 12,
 };
 
@@ -23,16 +26,33 @@ export default class RichTextEditor extends Component {
 
     autoBindReact(this);
 
-    this.editorRef = createRef();
     const initialValue = _.get(this.props, 'value');
+    this.editorRef = createRef();
+    this.emojiPickerRef = createRef();
+
+    // Resolve custom plugins (toolbar options)
+    const imagesCCplugin = customPlugins.initImagesCC(
+      this.handleShowImagePickerModal,
+    );
+    const emojiPickerPlugin = customPlugins.initEmojiPicker(
+      this.handleToggleEmojiPicker,
+    );
+    const allCustomPlugins = [
+      imagesCCplugin,
+      emojiPickerPlugin,
+      ...props.customPlugins,
+    ];
+    this.editorOptions = resolveEditorOptions(allCustomPlugins);
 
     this.state = {
       rteValue: initialValue,
+      showImagePickerModal: false,
     };
   }
 
   componentWillUnmount() {
     this.editorRef = null;
+    this.emojiPickerRef = null;
   }
 
   handleValueChanged(rteValue) {
@@ -54,17 +74,61 @@ export default class RichTextEditor extends Component {
     );
   }
 
+  handleShowImagePickerModal() {
+    this.setState({ showImagePickerModal: true });
+  }
+
+  handleHideImagePickerModal() {
+    this.setState({ showImagePickerModal: false });
+  }
+
+  handleImagesSelected(images) {
+    const { onChange } = this.props;
+    const { rteValue } = this.state;
+
+    const imagesHtml = _.map(images, (selectedImage) => {
+      const image = {
+        id: _.get(selectedImage, 'id'),
+        user: {
+          name: _.get(selectedImage, 'user.name'),
+          profileUrl: _.get(selectedImage, 'user.links.html'),
+        },
+        url: _.get(selectedImage, 'urls.full'),
+      };
+
+      return unsplash.imageWithDescriptionHtml(image);
+    });
+    const imagesHtmlString = imagesHtml.join('');
+
+
+    this.setState({ rteValue: rteValue + imagesHtmlString }, () => {
+      onChange(rteValue + imagesHtmlString);
+      this.handleHideImagePickerModal();
+    });
+  }
+
+  handleToggleEmojiPicker() {
+    this.emojiPickerRef.current.handleToggleEmojiPicker();
+  }
+
+  handleHideEmojiPicker() {
+    this.emojiPickerRef.current.hide();
+  }
+
   render() {
     const {
-      // eslint-disable-next-line no-unused-vars
-      onChange,
-      enableImageFormatting,
+      customPluginButtons,
       enableImageAlign,
       enableImageDescription,
+      enableImageFormatting,
+      enableImagePickerImageSearch,
       enableVideoAlign,
+      imagePickerLocalization,
+      imagePickerOptions,
+      onChange,
       ...otherProps
     } = this.props;
-    const { rteValue } = this.state;
+    const { rteValue, showImagePickerModal } = this.state;
 
     const classes = classNames('rich-text-editor__container', {
       'no-image-formatting': !enableImageFormatting,
@@ -72,24 +136,32 @@ export default class RichTextEditor extends Component {
       'no-image-align': !enableImageAlign,
       'no-video-align': !enableVideoAlign,
     });
+    const shouldShowImagePicker =
+      enableImagePickerImageSearch && showImagePickerModal;
 
     return (
       <div className={classes}>
         <EmojiPicker
+          ref={this.emojiPickerRef}
           onSelect={this.handleEmojiSelect}
-          iconClassName="rich-text-editor__emoji-icon"
+          showTogglePickerButton={false}
           style={EMOJI_PICKER_STYLE}
         />
+        {shouldShowImagePicker && (
+          <ImagePickerModal
+            options={imagePickerOptions}
+            localization={imagePickerLocalization}
+            onCloseButtonClick={this.handleHideImagePickerModal}
+            onImagesSelected={this.handleImagesSelected}
+          />
+        )}
         <SunEditor
           {...otherProps}
           ref={this.editorRef}
           setContents={rteValue}
-          onChange={this.handleValueChanged}
           onClick={this.handleHideEmojiPicker}
-          showController={this.showController}
-          setOptions={editorOptions}
-          class="test-class"
-          className="test-class-name"
+          onChange={this.handleValueChanged}
+          setOptions={this.editorOptions}
         />
       </div>
     );
@@ -97,17 +169,25 @@ export default class RichTextEditor extends Component {
 }
 
 RichTextEditor.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  enableImageFormatting: PropTypes.bool,
+  customPlugins: PropTypes.array,
   enableImageAlign: PropTypes.bool,
   enableImageDescription: PropTypes.bool,
+  enableImageFormatting: PropTypes.bool,
+  enableImagePickerImageSearch: PropTypes.bool,
   enableVideoAlign: PropTypes.bool,
+  imagePickerLocalization: PropTypes.object,
+  imagePickerOptions: PropTypes.object,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
 };
 
 RichTextEditor.defaultProps = {
-  enableImageFormatting: false,
+  customPlugins: [],
   enableImageAlign: false,
   enableImageDescription: false,
+  enableImageFormatting: false,
+  enableImagePickerImageSearch: true,
   enableVideoAlign: false,
+  imagePickerLocalization: {},
+  imagePickerOptions: {},
 };

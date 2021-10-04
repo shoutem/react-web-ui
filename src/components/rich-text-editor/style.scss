@@ -1,12 +1,4 @@
 .rich-text-editor__container {
-  .rich-text-editor__emoji-icon {
-    position: absolute;
-    z-index: 6;
-    right: 20px;
-    top: 150px;
-    cursor: pointer;
-  }
-
   &.no-image-formatting {
     .sun-editor .se-controller-resizing {
       display: none !important;
