@@ -24,6 +24,14 @@ export default class SearchInput extends Component {
     };
   }
 
+  componentDidMount() {
+    const { autoFocus } = this.props;
+
+    if (autoFocus) {
+      this.focus();
+    }
+  }
+
   focus() {
     this.searchControlInputRef.current.focus();
   }
@@ -66,6 +74,7 @@ export default class SearchInput extends Component {
 }
 
 SearchInput.propTypes = {
+  autoFocus: PropTypes.bool,
   /**
    * Additional class name to be passed to react component
    */
@@ -79,6 +88,7 @@ SearchInput.propTypes = {
 };
 
 SearchInput.defaultProps = {
+  autoFocus: false,
   value: null,
   regexValue: null,
 };
