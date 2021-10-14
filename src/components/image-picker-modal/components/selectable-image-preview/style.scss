@@ -1,0 +1,43 @@
+.selectable-image-preview__container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 160px;
+  width: 256px;
+  margin: 10px;
+  overflow: hidden;
+
+  &.is-selected {
+    border: 5px solid #00aadf;
+  }
+}
+
+.selectable-image-preview__overlay {
+  background-color: rgba(68, 79, 108, 0.1);
+  bottom: 0;
+  color: #fff;
+  font-size: 11px;
+  padding: 8px 13px;
+  position: absolute;
+  width: 100%;
+
+  &.is-selected {
+    padding: 3px 8px;
+  }
+}
+
+.selectable-image-preview__image-preview {
+  height: 160px;
+  object-fit: cover;
+  position: absolute;
+  width: 256px;
+}
+
+.selectable-image-preview__image-info-container {
+  overflow: hidden;
+}
+.selectable-image-preview__link-text {
+  color: #fff;
+  font-weight: bold;
+}
