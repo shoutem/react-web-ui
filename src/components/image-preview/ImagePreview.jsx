@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import noop from 'lodash/noop';
+import isFunction from 'lodash/isFunction';
 import classnames from 'classnames';
 import { imagePreviewDeleteError } from '../image-uploader';
 import { LoaderContainer } from '../loader';
@@ -22,7 +23,7 @@ export default class ImagePreview extends React.Component {
 
   handleClick() {
     const { onClick, src } = this.props;
-    if (_.isFunction(onClick)) {
+    if (isFunction(onClick)) {
       onClick(src);
     }
   }
@@ -74,7 +75,7 @@ export default class ImagePreview extends React.Component {
     if (!!src) {
       style.backgroundImage = `url('${src}')`;
     }
-    if (_.isFunction(onClick)) {
+    if (isFunction(onClick)) {
       style.cursor = 'pointer';
     }
 
@@ -167,5 +168,5 @@ ImagePreview.defaultProps = {
   previewSize: 'small',
   deleteStyle: 'delete',
   showDeleteError: true,
-  onDeleteError: _.noop,
+  onDeleteError: noop,
 };

@@ -3,7 +3,7 @@ import autoBindReact from 'auto-bind/react';
 import classNames from 'classnames';
 import { Picker } from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css';
-import _ from 'lodash';
+import isFunction from 'lodash/isFunction';
 import PropTypes from 'prop-types';
 import FontIcon from '../font-icon';
 import './style.scss';
@@ -30,7 +30,7 @@ export default class EmojiPicker extends Component {
   toggleEmojiPicker() {
     const { onToggleEmojiPicker } = this.props;
 
-    if (_.isFunction(onToggleEmojiPicker)) {
+    if (isFunction(onToggleEmojiPicker)) {
       onToggleEmojiPicker();
     }
   }

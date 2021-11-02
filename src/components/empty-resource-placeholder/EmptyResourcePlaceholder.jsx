@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import _ from 'lodash';
+import isObject from 'lodash/isObject';
 import './style.scss';
 
 export default function EmptyResourcePlaceholder({
@@ -13,7 +13,7 @@ export default function EmptyResourcePlaceholder({
   children,
 }) {
   const classNameMap = classNames('empty-placeholder', className);
-  const imageStyle = _.isObject(imageSize)
+  const imageStyle = isObject(imageSize)
     ? imageSize
     : { width: imageSize, height: imageSize };
 

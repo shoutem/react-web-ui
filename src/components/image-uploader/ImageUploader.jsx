@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import pick from 'lodash/pick';
+import isFunction from 'lodash/isFunction';
 import { HelpBlock } from 'react-bootstrap';
 import Dropzone from 'react-dropzone';
 import classNames from 'classnames';
@@ -47,7 +48,7 @@ export default class ImageUploader extends React.Component {
     const { id, onUploadSuccess } = this.props;
     this.setState({ uploading: false });
 
-    if (_.isFunction(onUploadSuccess)) {
+    if (isFunction(onUploadSuccess)) {
       onUploadSuccess(imageUrl, id);
     }
   }
@@ -56,7 +57,7 @@ export default class ImageUploader extends React.Component {
     const { id, onDeleteSuccess } = this.props;
     this.setState({ uploading: false });
 
-    if (_.isFunction(onDeleteSuccess)) {
+    if (isFunction(onDeleteSuccess)) {
       onDeleteSuccess(imageUrl, id);
     }
   }
@@ -66,7 +67,7 @@ export default class ImageUploader extends React.Component {
   }
 
   validateDimensions(image) {
-    const dimensionOptions = _.pick(this.props, [
+    const dimensionOptions = pick(this.props, [
       'autoResize',
       'width',
       'height',
@@ -88,7 +89,7 @@ export default class ImageUploader extends React.Component {
   }
 
   resizeImage(imageElement, imageFile) {
-    const resizeOptions = _.pick(this.props, [
+    const resizeOptions = pick(this.props, [
       'autoResize',
       'width',
       'height',
@@ -100,7 +101,7 @@ export default class ImageUploader extends React.Component {
       return imageFile;
     }
 
-    const calculateOptions = _.pick(this.props, ['width', 'height']);
+    const calculateOptions = pick(this.props, ['width', 'height']);
     const { width, height } = calculateValidImageDimensions(
       imageElement,
       calculateOptions,

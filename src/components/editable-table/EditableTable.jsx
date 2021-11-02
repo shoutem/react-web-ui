@@ -1,26 +1,33 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import map from 'lodash/map';
+import get from 'lodash/get';
+import noop from 'lodash/noop';
+import slice from 'lodash/slice';
+import filter from 'lodash/filter';
+import isEmpty from 'lodash/isEmpty';
+import isString from 'lodash/isString';
+import isFunction from 'lodash/isFunction';
 import classNames from 'classnames';
 import { ControlLabel } from 'react-bootstrap';
 import { EditableTableRow, TableRowTextPlaceholder } from './components';
 import './style.scss';
 
 function extractRequiredProps(rowDescriptors) {
-  const requiredDescriptors = _.filter(rowDescriptors, 'isRequired');
-  return _.map(requiredDescriptors, 'property');
+  const requiredDescriptors = filter(rowDescriptors, 'isRequired');
+  return map(requiredDescriptors, 'property');
 }
 
 function resolveRowKeyGenerator(rowKeyIdentifier) {
-  if (_.isFunction(rowKeyIdentifier)) {
+  if (isFunction(rowKeyIdentifier)) {
     return rowKeyIdentifier;
   }
 
-  if (_.isString(rowKeyIdentifier)) {
-    return row => _.get(row, rowKeyIdentifier);
+  if (isString(rowKeyIdentifier)) {
+    return row => get(row, rowKeyIdentifier);
   }
 
-  return _.noop;
+  return noop;
 }
 
 export default class EditableTable extends Component {
@@ -58,17 +65,14 @@ export default class EditableTable extends Component {
     const { rows, onRowsUpdated, onRowDeleted, onRowDeleteClick } = this.props;
 
     const rowToDelete = rows[index];
-    if (_.isFunction(onRowDeleteClick)) {
+    if (isFunction(onRowDeleteClick)) {
       const proceedWithDeletion = onRowDeleteClick(rowToDelete);
       if (!proceedWithDeletion) {
         return;
       }
     }
 
-    const updatedRows = [
-      ..._.slice(rows, 0, index),
-      ..._.slice(rows, index + 1),
-    ];
+    const updatedRows = [...slice(rows, 0, index), ...slice(rows, index + 1)];
 
     onRowsUpdated(updatedRows);
     onRowDeleted(rowToDelete.id);
@@ -78,9 +82,9 @@ export default class EditableTable extends Component {
     const { rows, onRowsUpdated, onRowUpdated } = this.props;
 
     const updatedRows = [
-      ..._.slice(rows, 0, index),
+      ...slice(rows, 0, index),
       updatedRow,
-      ..._.slice(rows, index + 1),
+      ...slice(rows, index + 1),
     ];
 
     onRowsUpdated(updatedRows);
@@ -130,17 +134,17 @@ export default class EditableTable extends Component {
 
   renderTableRows(displayEmptyState) {
     const { rows, headers, emptyStateText } = this.props;
-    const emptyRows = _.isEmpty(rows);
+    const emptyRows = isEmpty(rows);
     if (emptyRows && displayEmptyState) {
       return (
         <TableRowTextPlaceholder
           text={emptyStateText}
-          colSpan={_.size(headers)}
+          colSpan={size(headers)}
         />
       );
     }
 
-    return _.map(rows, (row, index) => this.renderTableRow(row, index));
+    return map(rows, (row, index) => this.renderTableRow(row, index));
   }
 
   render() {
@@ -155,7 +159,7 @@ export default class EditableTable extends Component {
         <table className="table editable-table__table">
           <thead>
             <tr>
-              {_.map(headers, header => (
+              {map(headers, header => (
                 <th key={header}>
                   <ControlLabel>{header}</ControlLabel>
                 </th>
@@ -274,10 +278,10 @@ EditableTable.propTypes = {
 EditableTable.defaultProps = {
   rows: [],
   rowKeyIdentifier: 'id',
-  onRowsUpdated: _.noop,
-  onRowAdded: _.noop,
-  onRowUpdated: _.noop,
-  onRowDeleted: _.noop,
+  onRowsUpdated: noop,
+  onRowAdded: noop,
+  onRowUpdated: noop,
+  onRowDeleted: noop,
   onRowUpdateClick: null,
   onRowDeleteClick: null,
   emptyStateText: 'No items yet.',

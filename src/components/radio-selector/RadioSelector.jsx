@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import noop from 'lodash/noop';
 import classNames from 'classnames';
 import { FormGroup } from 'react-bootstrap';
 import Radio from '../radio';
@@ -85,7 +85,7 @@ RadioSelector.propTypes = {
 };
 
 RadioSelector.defaultProps = {
-  onSelect: _.noop,
+  onSelect: noop,
   inline: false,
   groupName: 'radioGroup',
 };

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import ceil from 'lodash/ceil';
+import isUndefined from 'lodash/isUndefined';
 import { Pager } from 'react-bootstrap';
 import FontIcon from '../font-icon';
 import './style.scss';
@@ -14,7 +15,7 @@ function calculatePageCount(itemCount, limit) {
     return 0;
   }
 
-  return _.ceil(itemCount / limit);
+  return ceil(itemCount / limit);
 }
 
 function calculatePageIndex(limit, offset) {
@@ -123,7 +124,7 @@ export default class Paging extends Component {
     const { hasPrevious } = this.props;
     const { pageIndex } = this.state;
 
-    if (!_.isUndefined(hasPrevious)) {
+    if (!isUndefined(hasPrevious)) {
       return hasPrevious;
     }
 
@@ -134,7 +135,7 @@ export default class Paging extends Component {
     const { hasNext } = this.props;
     const { pageCount, pageIndex } = this.state;
 
-    if (!_.isUndefined(hasNext)) {
+    if (!isUndefined(hasNext)) {
       return hasNext;
     }
 

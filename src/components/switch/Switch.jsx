@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import _ from 'lodash';
+import omit from 'lodash/omit';
+import uniqueId from 'lodash/uniqueId';
 import './style.scss';
 
 export default class Switch extends Component {
@@ -12,7 +13,7 @@ export default class Switch extends Component {
     this.renderSwitchButton = this.renderSwitchButton.bind(this);
 
     this.state = {
-      switchId: _.uniqueId('switch__'),
+      switchId: uniqueId('switch__'),
       checked: !!props.value,
     };
   }
@@ -35,7 +36,7 @@ export default class Switch extends Component {
   }
 
   renderSwitchButton() {
-    const otherProps = _.omit(this.props, ['className', 'children']);
+    const otherProps = omit(this.props, ['className', 'children']);
     const { checked, switchId } = this.state;
 
     return (

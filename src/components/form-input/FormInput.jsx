@@ -1,7 +1,9 @@
 import React, { Component, createRef } from 'react';
 import autoBindReact from 'auto-bind/react';
 import classNames from 'classnames';
-import _ from 'lodash';
+import get from 'lodash/get';
+import toString from 'lodash/toString';
+import isFunction from 'lodash/isFunction';
 import PropTypes from 'prop-types';
 import { ControlLabel, FormGroup, HelpBlock } from 'react-bootstrap';
 import DebounceInput from 'react-debounce-input';
@@ -32,13 +34,13 @@ export default class FormInput extends Component {
   handleEmojiSelect(emoji) {
     const { onChange } = this.props;
 
-    if (_.isFunction(onChange) && !!emoji) {
-      const input = _.get(this.inputRef, 'current');
+    if (isFunction(onChange) && !!emoji) {
+      const input = get(this.inputRef, 'current');
       if (!input) {
         return;
       }
 
-      const inputValue = _.toString(input.value);
+      const inputValue = toString(input.value);
       const selectionStart = input.selectionStart;
       const selectionEnd = input.selectionEnd;
       const textBeforeSelectionStart = inputValue.substring(0, selectionStart);
@@ -52,14 +54,14 @@ export default class FormInput extends Component {
       const event = { target: { value } };
       onChange(event);
 
-      if (_.isFunction(input.focus)) {
+      if (isFunction(input.focus)) {
         input.focus();
       }
     }
   }
 
   handleEmojiPickerToggled() {
-    const input = _.get(this.inputRef, 'current');
+    const input = get(this.inputRef, 'current');
     if (!input) {
       return;
     }
@@ -67,10 +69,10 @@ export default class FormInput extends Component {
     const selectionStart = input.selectionStart;
     const selectionEnd = input.selectionEnd;
 
-    if (_.isFunction(input.focus)) {
+    if (isFunction(input.focus)) {
       input.focus();
     }
-    if (_.isFunction(input.setSelectionRange)) {
+    if (isFunction(input.setSelectionRange)) {
       input.setSelectionRange(selectionStart, selectionEnd);
     }
   }

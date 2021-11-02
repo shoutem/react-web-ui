@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import map from 'lodash/map';
 import classNames from 'classnames';
 import FontIcon from '../font-icon';
 import './style.scss';
@@ -17,7 +17,7 @@ export default function StepIndicator({
 
   return (
     <div className={stepIndicatorClasses}>
-      {_.map(steps, (step, index) => {
+      {map(steps, (step, index) => {
         const { label, value } = step;
 
         const stepNumber = index + 1;
