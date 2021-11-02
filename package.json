@@ -31,17 +31,19 @@
     "lodash": "^4.17.19",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
-    "react": "^16.12.0",
     "react-bootstrap": "^0.32.4",
     "react-datetime": "^2.16.3",
     "react-debounce-input": "^3.2.2",
     "react-dnd": "^2.1.4",
     "react-dnd-html5-backend": "^2.1.2",
-    "react-dom": "^16.12.0",
     "react-dropzone": "^3.7.4",
     "react-select": "^1.0.0-rc.5",
     "suneditor-react": "^2.16.3",
     "unsplash-js": "^7.0.15"
+  },
+  "peerDependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.0",
@@ -65,7 +67,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "file-loader": "^5.0.2",
     "mini-css-extract-plugin": "^0.9.0",
-    "node-sass": "^4.1.1",
+    "node-sass": "^4.13.1",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.19.1",
     "rimraf": "^2.5.4",
