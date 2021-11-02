@@ -1,33 +1,52 @@
-var path = require('path');
-var webpack = require('webpack');
-var cssnano = require('cssnano');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: {
-    ['web-ui']:[ path.resolve(__dirname, '../src/styles/index.scss') ],
+    'web-ui': [path.resolve(__dirname, '../src/styles/index.scss')],
   },
   target: 'web',
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].js',
   },
+  mode: 'production',
   module: {
     rules: [
       {
         test: /\.scss$/,
         include: /src/,
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: ['css-loader', 'postcss-loader', 'sass-loader'],
-        }),
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [require('cssnano')()],
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                includePaths: [path.resolve(__dirname, '../src/styles')],
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.woff(\?.*)?$/,
         use: [
           {
             loader: 'url-loader',
-            query: 'prefix=fonts/&name=fonts/[name].[ext]&limit=10000&mimetype=application/font-woff',
+            options: {
+              name: '[path][name].[ext]',
+              mimetype: 'application/font-woff',
+              limit: 10000,
+            },
           },
         ],
       },
@@ -36,7 +55,11 @@ module.exports = {
         use: [
           {
             loader: 'url-loader',
-            query: 'prefix=fonts/&name=fonts/[name].[ext]&limit=10000&mimetype=application/font-woff2',
+            options: {
+              name: '[path][name].[ext]',
+              mimetype: 'application/font-woff2',
+              limit: 10000,
+            },
           },
         ],
       },
@@ -45,7 +68,11 @@ module.exports = {
         use: [
           {
             loader: 'file-loader',
-            query: 'prefix=fonts/&name=fonts/[name].[ext]&limit=10000&mimetype=font/opentype',
+            options: {
+              name: '[path][name].[ext]',
+              mimetype: 'font/opentype',
+              limit: 10000,
+            },
           },
         ],
       },
@@ -54,7 +81,11 @@ module.exports = {
         use: [
           {
             loader: 'url-loader',
-            query: 'prefix=fonts/&name=fonts/[name].[ext]&limit=10000&mimetype=application/octet-stream',
+            options: {
+              name: '[path][name].[ext]',
+              mimetype: 'application/octet-stream',
+              limit: 10000,
+            },
           },
         ],
       },
@@ -63,7 +94,9 @@ module.exports = {
         use: [
           {
             loader: 'file-loader',
-            query: 'prefix=fonts/&name=fonts/[name].[ext]',
+            options: {
+              name: '[path][name].[ext]',
+            },
           },
         ],
       },
@@ -72,7 +105,11 @@ module.exports = {
         use: [
           {
             loader: 'url-loader',
-            query: 'prefix=fonts/&name=fonts/[name].[ext]&limit=10000&mimetype=image/svg+xml',
+            options: {
+              name: '[path][name].[ext]',
+              mimetype: 'image/svg+xml',
+              limit: 10000,
+            },
           },
         ],
       },
@@ -81,42 +118,22 @@ module.exports = {
         use: [
           {
             loader: 'url-loader',
-            query: 'limit=8192',
+            options: {
+              limit: 8192,
+            },
           },
         ],
       },
-    ]
+    ],
   },
   plugins: [
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        postcss: [
-          cssnano({
-            autoprefixer: {
-              add: true,
-              remove: true,
-              browsers: ['last 2 versions']
-            },
-            discardComments: {
-              removeAll: true
-            },
-            safe: true,
-            sourcemap: true
-          })
-        ],
-        context: '/',
-      }
-    }),
-    new ExtractTextPlugin({
-      filename: '[name].css',
-      allChunks: true
+    new MiniCssExtractPlugin({
+      filename: '[name].css?q=[contenthash]',
+      allChunks: true,
     }),
   ],
   resolve: {
-    modules: [
-      'src',
-      'node_modules',
-    ],
-    extensions: ['.js', '.jsx', '.json', '.css', '.sass', '.scss', '.html']
+    modules: ['src', 'node_modules'],
+    extensions: ['.js', '.jsx', '.json', '.css', '.sass', '.scss', '.html'],
   },
 };
