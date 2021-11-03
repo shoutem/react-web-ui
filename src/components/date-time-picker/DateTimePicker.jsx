@@ -4,7 +4,7 @@ import autoBindReact from 'auto-bind/react';
 import _ from 'lodash';
 import DateTime from 'react-datetime';
 import classNames from 'classnames';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import DebounceInput from 'react-debounce-input';
 import FontIcon from '../font-icon';
 import './style.scss';
@@ -73,8 +73,8 @@ export default class DateTimePicker extends Component {
         />
       );
     }
-    const momentValue = moment(value);
-    if (!momentValue.isValid()) {
+    const dayjsValue = dayjs(value);
+    if (!dayjsValue.isValid()) {
       // eslint-disable-next-line
       console.error(
         `Invalid value provided to DateTimePicker: ${JSON.stringify(value)}`,
@@ -85,7 +85,7 @@ export default class DateTimePicker extends Component {
       <DateTime
         className={classes}
         renderInput={this.renderInput}
-        value={momentValue.format(this.dateTimeFormat)}
+        value={dayjsValue.format(this.dateTimeFormat)}
         {...otherProps}
       />
     );
