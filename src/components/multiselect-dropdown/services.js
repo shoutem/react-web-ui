@@ -10,10 +10,10 @@ export function getDisplayLabel(
     return emptyText;
   }
 
-  const selectedLabels = _.chain(options)
-    .filter(option => _.includes(selectedValues, option.value))
-    .map('label')
-    .value();
+  const filteredLabels = _.filter(options, option =>
+    _.includes(selectedValues, option.value),
+  );
+  const selectedLabels = _.map(filteredLabels, 'label');
 
   if (_.size(selectedLabels) <= maxSelectedOptionsDisplayed) {
     return selectedLabels.join(', ');

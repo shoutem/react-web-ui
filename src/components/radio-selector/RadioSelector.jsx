@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import autoBindReact from 'auto-bind/react';
 import classNames from 'classnames';
 import { FormGroup } from 'react-bootstrap';
 import Radio from '../radio';
@@ -9,8 +10,7 @@ import './style.scss';
 export default class RadioSelector extends Component {
   constructor(props) {
     super(props);
-
-    this.handleSelect = this.handleSelect.bind(this);
+    autoBindReact(this);
   }
 
   handleSelect(event) {

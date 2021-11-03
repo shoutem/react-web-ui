@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import autoBindReact from 'auto-bind/react';
 import _ from 'lodash';
 import DateTime from 'react-datetime';
 import classNames from 'classnames';
@@ -11,9 +12,7 @@ import './style.scss';
 export default class DateTimePicker extends Component {
   constructor(props) {
     super(props);
-
-    this.handleClearSelection = this.handleClearSelection.bind(this);
-    this.renderInput = this.renderInput.bind(this);
+    autoBindReact(this);
 
     const { dateFormat, timeFormat } = props;
 

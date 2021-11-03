@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import autoBindReact from 'auto-bind/react';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import classNames from 'classnames';
@@ -26,20 +27,7 @@ import './style.scss';
 class NestedSortable extends Component {
   constructor(props) {
     super(props);
-    this.moveNode = this.moveNode.bind(this);
-    this.calculateDestination = this.calculateDestination.bind(this);
-    this.updateTree = this.updateTree.bind(this);
-    this.isSelected = this.isSelected.bind(this);
-    this.isHovered = this.isHovered.bind(this);
-    this.onHoverChange = this.onHoverChange.bind(this);
-    this.onToggleCollapse = this.onToggleCollapse.bind(this);
-    this.isCollapsed = this.isCollapsed.bind(this);
-    this.onDragAndDropStart = this.onDragAndDropStart.bind(this);
-    this.onDragAndDropComplete = this.onDragAndDropComplete.bind(this);
-    this.createNodeMap = this.createNodeMap.bind(this);
-    this.createParentNodeMap = this.createParentNodeMap.bind(this);
-    this.calculateNodePredecessors = this.calculateNodePredecessors.bind(this);
-    this.updateStateWithProps = this.updateStateWithProps.bind(this);
+    autoBindReact(this);
 
     this.state = {
       collapsed: {},

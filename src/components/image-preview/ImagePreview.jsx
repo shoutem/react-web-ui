@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import autoBindReact from 'auto-bind/react';
 import _ from 'lodash';
 import classnames from 'classnames';
 import { imagePreviewDeleteError } from '../image-uploader';
@@ -10,10 +11,7 @@ import './style.scss';
 export default class ImagePreview extends React.Component {
   constructor(props) {
     super(props);
-
-    this.handleClick = this.handleClick.bind(this);
-    this.handleDeleteFailed = this.handleDeleteFailed.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
+    autoBindReact(this);
 
     this.state = {
       inProgress: false,

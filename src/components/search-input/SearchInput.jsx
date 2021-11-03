@@ -1,5 +1,6 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
+import autoBindReact from 'auto-bind/react';
 import _ from 'lodash';
 import classNames from 'classnames';
 import ActionInput from '../action-input';
@@ -7,16 +8,12 @@ import ActionInput from '../action-input';
 export default class SearchInput extends Component {
   constructor(props) {
     super(props);
+    autoBindReact(this);
 
     const { value, regexValue } = props;
 
     this.searchControlInputRef = createRef();
-    this.focus = this.focus.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleInputChanged = _.debounce(
-      this.handleInputChanged.bind(this),
-      250,
-    );
+    this.handleInputChanged = _.debounce(this.handleInputChanged, 250);
 
     this.state = {
       value,

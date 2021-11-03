@@ -1,4 +1,5 @@
 import React from 'react';
+import autoBindReact from 'auto-bind/react';
 import { Dropdown } from 'react-bootstrap';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
@@ -7,10 +8,7 @@ import './style.scss';
 export default class EnhancedDropdown extends Dropdown {
   constructor(props, context) {
     super(props, context);
-
-    this.updateDropdownState = this.updateDropdownState.bind(this);
-    this.onDropdownToggle = this.onDropdownToggle.bind(this);
-    this.onEnter = this.onEnter.bind(this);
+    autoBindReact(this);
 
     this.state = {
       dropup: this.props.dropup,

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import autoBindReact from 'auto-bind/react';
 import classNames from 'classnames';
 import FontIcon from '../../../font-icon';
 import Dot from '../../../dot';
@@ -9,11 +10,7 @@ import './style.scss';
 export default class NodeHeader extends Component {
   constructor(props) {
     super(props);
-
-    this.handleMouseEnter = this.handleMouseEnter.bind(this);
-    this.handleMouseLeave = this.handleMouseLeave.bind(this);
-    this.handleToggleCollapse = this.handleToggleCollapse.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    autoBindReact(this);
   }
 
   handleClick() {
