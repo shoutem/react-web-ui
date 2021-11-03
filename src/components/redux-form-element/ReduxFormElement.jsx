@@ -1,10 +1,7 @@
 import React, { Component, createRef } from 'react';
 import autoBindReact from 'auto-bind/react';
 import classNames from 'classnames';
-import get from 'lodash/get';
-import omit from 'lodash/omit';
-import toString from 'lodash/toString';
-import isFunction from 'lodash/isFunction';
+import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { ControlLabel, FormGroup, HelpBlock } from 'react-bootstrap';
 import DebounceInput from 'react-debounce-input';
@@ -59,7 +56,10 @@ export default class ReduxFormElement extends Component {
       'redux-form-element__emoji-icon',
       emojiIconClassName,
     );
-    const inputProps = omit({ disabled, ...field, ...otherProps }, 'className');
+    const inputProps = _.omit(
+      { disabled, ...field, ...otherProps },
+      'className',
+    );
 
     return (
       <div className="redux-form-element__container">
@@ -86,7 +86,7 @@ export default class ReduxFormElement extends Component {
   }
 
   handleEmojiPickerShown() {
-    const input = get(this.inputRef, 'current');
+    const input = _.get(this.inputRef, 'current');
     if (!input) {
       return;
     }
@@ -94,21 +94,21 @@ export default class ReduxFormElement extends Component {
     const selectionStart = input.selectionStart;
     const selectionEnd = input.selectionEnd;
 
-    if (isFunction(input.focus)) {
+    if (_.isFunction(input.focus)) {
       input.focus();
     }
-    if (isFunction(input.setSelectionRange)) {
+    if (_.isFunction(input.setSelectionRange)) {
       input.setSelectionRange(selectionStart, selectionEnd);
     }
   }
 
   handleEmojiSelect(emoji) {
-    const input = get(this.inputRef, 'current');
+    const input = _.get(this.inputRef, 'current');
     if (!input || !emoji) {
       return;
     }
 
-    const inputValue = toString(input.value);
+    const inputValue = _.toString(input.value);
     const selectionStart = input.selectionStart;
     const selectionEnd = input.selectionEnd;
     const textBeforeSelectionStart = inputValue.substring(0, selectionStart);
@@ -118,11 +118,11 @@ export default class ReduxFormElement extends Component {
     );
     const value = `${textBeforeSelectionStart}${emoji.native}${textAfterSelectionEnd}`;
 
-    const onChange = get(this.props, 'field.onChange');
-    if (isFunction(onChange)) {
+    const onChange = _.get(this.props, 'field.onChange');
+    if (_.isFunction(onChange)) {
       onChange(value);
     }
-    if (isFunction(input.focus)) {
+    if (_.isFunction(input.focus)) {
       input.focus();
     }
   }

@@ -1,5 +1,5 @@
 import { findDOMNode } from 'react-dom';
-import isEqual from 'lodash/isEqual';
+import _ from 'lodash';
 
 function getHoverCenter(hoverBoundingRect, isHorizontal) {
   return isHorizontal
@@ -31,7 +31,7 @@ export function updateNodeLocation(node, destination) {
 }
 
 export function returnNodeToSource(props, node, source, target) {
-  if (isEqual(source, target)) {
+  if (_.isEqual(source, target)) {
     return;
   }
 

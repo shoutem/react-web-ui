@@ -1,8 +1,7 @@
 import React, { Component, createRef } from 'react';
 import autoBindReact from 'auto-bind/react';
 import classNames from 'classnames';
-import get from 'lodash/get';
-import map from 'lodash/map';
+import _ from 'lodash';
 import PropTypes from 'prop-types';
 import SunEditor from 'suneditor-react';
 import 'suneditor/dist/css/suneditor.min.css';
@@ -27,7 +26,7 @@ export default class RichTextEditor extends Component {
 
     autoBindReact(this);
 
-    const initialValue = get(this.props, 'value');
+    const initialValue = _.get(this.props, 'value');
     this.editorRef = createRef();
     this.emojiPickerRef = createRef();
 
@@ -87,19 +86,20 @@ export default class RichTextEditor extends Component {
     const { onChange } = this.props;
     const { rteValue } = this.state;
 
-    const imagesHtml = map(images, selectedImage => {
+    const imagesHtml = _.map(images, (selectedImage) => {
       const image = {
-        id: get(selectedImage, 'id'),
+        id: _.get(selectedImage, 'id'),
         user: {
-          name: get(selectedImage, 'user.name'),
-          profileUrl: get(selectedImage, 'user.links.html'),
+          name: _.get(selectedImage, 'user.name'),
+          profileUrl: _.get(selectedImage, 'user.links.html'),
         },
-        url: get(selectedImage, 'urls.full'),
+        url: _.get(selectedImage, 'urls.full'),
       };
 
       return unsplash.imageWithDescriptionHtml(image);
     });
     const imagesHtmlString = imagesHtml.join('');
+
 
     this.setState({ rteValue: rteValue + imagesHtmlString }, () => {
       onChange(rteValue + imagesHtmlString);

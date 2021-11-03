@@ -1,8 +1,8 @@
-import map from 'lodash/map';
+import _ from 'lodash';
 import customPlugins from './customPlugins';
 
 export function resolveEditorOptions(allPlugins) {
-  const resolvedPlugins = map(allPlugins, plugin => {
+  const resolvedPlugins = _.map(allPlugins, (plugin) => {
     if (
       plugin.name === customPlugins.IMAGESCC_CUSTOM_PLUGIN ||
       plugin.name === customPlugins.EMOJI_CUSTOM_PLUGIN
@@ -12,7 +12,7 @@ export function resolveEditorOptions(allPlugins) {
 
     return plugin.definition;
   });
-  const resolvedCustomPluginButtons = map(allPlugins, plugin => {
+  const resolvedCustomPluginButtons = _.map(allPlugins, (plugin) => {
     if (
       plugin.name === customPlugins.IMAGESCC_CUSTOM_PLUGIN ||
       plugin.name === customPlugins.EMOJI_CUSTOM_PLUGIN

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import noop from 'lodash/noop';
+import _ from 'lodash';
 import { Modal, Button } from 'react-bootstrap';
 
 export default function InfoModal({
@@ -30,7 +30,7 @@ export default function InfoModal({
 InfoModal.defaultProps = {
   btnLabel: 'Close',
   btnBsStyle: 'primary',
-  onHide: noop,
+  onHide: _.noop,
 };
 
 InfoModal.propTypes = {

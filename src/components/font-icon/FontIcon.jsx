@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import omit from 'lodash/omit';
+import _ from 'lodash';
 import classNames from 'classnames';
 
 export default function FontIcon({ className, name, size, ...props }) {
@@ -10,7 +10,7 @@ export default function FontIcon({ className, name, size, ...props }) {
     fontSize: size,
   };
 
-  const otherProps = omit(props, ['bsStyle', 'bsRole']);
+  const otherProps = _.omit(props, ['bsStyle', 'bsRole']);
 
   return <span {...otherProps} style={style} className={classNameMap} />;
 }

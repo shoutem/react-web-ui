@@ -1,4 +1,4 @@
-import get from 'lodash/get';
+import _ from 'lodash';
 import { createApi } from 'unsplash-js';
 import logo from '../img/unsplash-logo.png';
 
@@ -21,7 +21,7 @@ async function searchImages(api, query, perPage) {
   try {
     const result = await api.search.getPhotos({ query, perPage });
 
-    return get(result, 'response.results', []);
+    return _.get(result, 'response.results', []);
   } catch (error) {
     return [];
   }

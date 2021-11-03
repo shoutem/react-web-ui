@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import map from 'lodash/map';
-import union from 'lodash/union';
-import includes from 'lodash/includes';
-import without from 'lodash/without';
-import isEqual from 'lodash/isEqual';
-import isEmpty from 'lodash/isEmpty';
-import isFunction from 'lodash/isFunction';
+import _ from 'lodash';
 import { MenuItem } from 'react-bootstrap';
 import Dropdown from '../dropdown';
 import Checkbox from '../checkbox';
@@ -47,8 +41,8 @@ export default class MultiselectDropdown extends Component {
     } = event;
 
     const newSelectedValues = checked
-      ? union(selectedValues, [value])
-      : without(selectedValues, value);
+      ? _.union(selectedValues, [value])
+      : _.without(selectedValues, value);
 
     this.setState({ selectedValues: newSelectedValues });
   }
@@ -64,7 +58,7 @@ export default class MultiselectDropdown extends Component {
       selectedValues: initialSelectedValues,
     } = this.props;
 
-    if (isEqual(selectedValues, initialSelectedValues)) {
+    if (_.isEqual(selectedValues, initialSelectedValues)) {
       return;
     }
 
@@ -78,7 +72,7 @@ export default class MultiselectDropdown extends Component {
       this.handleSelectionChanged();
     }
 
-    if (isFunction(onToggle)) {
+    if (_.isFunction(onToggle)) {
       onToggle(isOpen);
     }
   }
@@ -87,7 +81,7 @@ export default class MultiselectDropdown extends Component {
     const { selectedValues } = this.state;
 
     const { value, label } = item;
-    const checked = includes(selectedValues, value);
+    const checked = _.includes(selectedValues, value);
 
     return (
       <Checkbox
@@ -106,7 +100,7 @@ export default class MultiselectDropdown extends Component {
     const { selectedValues } = this.state;
     const { selectNoneText } = this.props;
 
-    const checked = isEmpty(selectedValues);
+    const checked = _.isEmpty(selectedValues);
 
     return (
       <div>
@@ -132,7 +126,7 @@ export default class MultiselectDropdown extends Component {
       showSelectNoneOption,
     } = this.props;
 
-    const dropdownDisabled = disabled || isEmpty(options);
+    const dropdownDisabled = disabled || _.isEmpty(options);
     const selectedOptionLabel = getDisplayLabel(
       options,
       selectedValues,
@@ -153,7 +147,7 @@ export default class MultiselectDropdown extends Component {
           <MenuItem divider />
           {showSelectNoneOption && this.renderSelectNoneOption()}
           <div className="multiselect-dropdown__items">
-            {map(options, this.renderMenuItem)}
+            {_.map(options, this.renderMenuItem)}
           </div>
         </Dropdown.Menu>
       </Dropdown>

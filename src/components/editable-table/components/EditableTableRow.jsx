@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import get from 'lodash/get';
-import map from 'lodash/map';
-import every from 'lodash/every';
-import isEmpty from 'lodash/isEmpty';
-import isFunction from 'lodash/isFunction';
+import _ from 'lodash';
 import classNames from 'classnames';
 import EditableTableCell from './EditableTableCell';
 import EditableTableActionsCell from './EditableTableActionsCell';
@@ -29,7 +25,7 @@ export default class EditableTableRow extends Component {
   handleEditClick() {
     const { row, onUpdateClick } = this.props;
 
-    if (!isFunction(onUpdateClick)) {
+    if (!_.isFunction(onUpdateClick)) {
       this.setState({ row, inEditMode: true });
       return;
     }
@@ -54,7 +50,7 @@ export default class EditableTableRow extends Component {
   handleRowClick() {
     const { onRowClick, row } = this.props;
 
-    if (isFunction(onRowClick)) {
+    if (_.isFunction(onRowClick)) {
       onRowClick(row);
     }
   }
@@ -73,9 +69,9 @@ export default class EditableTableRow extends Component {
   isRowValid() {
     const { row } = this.state;
     const { requiredProps } = this.props;
-    return every(requiredProps, prop => {
-      const propValue = get(row, prop);
-      return !isEmpty(propValue);
+    return _.every(requiredProps, prop => {
+      const propValue = _.get(row, prop);
+      return !_.isEmpty(propValue);
     });
   }
 
@@ -86,9 +82,9 @@ export default class EditableTableRow extends Component {
     const { getDisplayValue, property } = fieldDescriptor;
     const currentRow = inEditMode ? stateRow : row;
 
-    const value = isFunction(getDisplayValue)
+    const value = _.isFunction(getDisplayValue)
       ? getDisplayValue(currentRow)
-      : get(currentRow, property);
+      : _.get(currentRow, property);
 
     return (
       <EditableTableCell
@@ -119,12 +115,12 @@ export default class EditableTableRow extends Component {
     const rowValid = this.isRowValid();
 
     const classes = classNames('editable-table-row', {
-      'editable-table-row-cursor': isFunction(onRowClick),
+      'editable-table-row-cursor': _.isFunction(onRowClick),
     });
 
     return (
       <tr className={classes} onClick={this.handleRowClick}>
-        {map(rowDescriptors, this.renderTableCell)}
+        {_.map(rowDescriptors, this.renderTableCell)}
         <EditableTableActionsCell
           onDeleteClick={this.handleDeleteClick}
           onSaveClick={this.handleSaveClick}

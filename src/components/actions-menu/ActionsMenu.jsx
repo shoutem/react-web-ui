@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import uniqueId from 'lodash/uniqueId';
+import _ from 'lodash';
 import classNames from 'classnames';
 import FontIcon from '../font-icon';
 import Dropdown from '../dropdown';
@@ -19,7 +19,7 @@ function stopEventPropagation(e) {
  */
 function ActionsMenu({ className, children }) {
   const classes = classNames('actions-menu', className);
-  const menuId = uniqueId('actions-menu-');
+  const menuId = _.uniqueId('actions-menu-');
 
   return (
     <Dropdown className={classes} id={menuId} onClick={stopEventPropagation}>

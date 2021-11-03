@@ -1,9 +1,6 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import noop from 'lodash/noop';
-import omit from 'lodash/omit';
-import debounce from 'lodash/debounce';
-import escapeRegExp from 'lodash/escapeRegExp';
+import _ from 'lodash';
 import classNames from 'classnames';
 import ActionInput from '../action-input';
 
@@ -16,7 +13,10 @@ export default class SearchInput extends Component {
     this.searchControlInputRef = createRef();
     this.focus = this.focus.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleInputChanged = debounce(this.handleInputChanged.bind(this), 250);
+    this.handleInputChanged = _.debounce(
+      this.handleInputChanged.bind(this),
+      250,
+    );
 
     this.state = {
       value,
@@ -38,7 +38,7 @@ export default class SearchInput extends Component {
 
   handleInputChange(event) {
     const value = event.target.value;
-    const regexValue = new RegExp(escapeRegExp(value), 'ig');
+    const regexValue = new RegExp(_.escapeRegExp(value), 'ig');
 
     this.setState(
       {
@@ -56,7 +56,7 @@ export default class SearchInput extends Component {
 
   render() {
     const { className } = this.props;
-    const otherProps = omit(this.props, ['className', 'onChange']);
+    const otherProps = _.omit(this.props, ['className', 'onChange']);
     const classes = classNames('search-input', className);
 
     return (
@@ -67,7 +67,7 @@ export default class SearchInput extends Component {
         ref={this.searchControlInputRef}
         {...otherProps}
       >
-        <ActionInput.Left icon="search" onClick={noop} />
+        <ActionInput.Left icon="search" onClick={_.noop} />
       </ActionInput>
     );
   }

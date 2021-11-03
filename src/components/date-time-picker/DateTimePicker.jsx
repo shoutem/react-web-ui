@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import isEmpty from 'lodash/isEmpty';
+import _ from 'lodash';
 import DateTime from 'react-datetime';
 import classNames from 'classnames';
 import moment from 'moment';
@@ -40,7 +40,7 @@ export default class DateTimePicker extends Component {
 
   renderInput(props) {
     const { clearable, value } = this.props;
-    const renderClearButton = clearable && !isEmpty(value);
+    const renderClearButton = clearable && !_.isEmpty(value);
 
     return (
       <div className="date-time-picker__input">

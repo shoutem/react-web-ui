@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import map from 'lodash/map';
-import range from 'lodash/range';
+import _ from 'lodash';
 import { Dropdown, MenuItem } from 'react-bootstrap';
 
 export default class NumericDropdown extends Component {
@@ -22,7 +21,7 @@ export default class NumericDropdown extends Component {
   createNumberOptions() {
     const { min, max } = this.props;
     this.setState({
-      numberOptions: range(min, max + 1),
+      numberOptions: _.range(min, max + 1),
     });
   }
 
@@ -34,7 +33,7 @@ export default class NumericDropdown extends Component {
       <Dropdown className="block" onSelect={onChange}>
         <Dropdown.Toggle>{value}</Dropdown.Toggle>
         <Dropdown.Menu>
-          {map(numberOptions, key => (
+          {_.map(numberOptions, key => (
             <MenuItem key={key} eventKey={key}>
               {key}
             </MenuItem>

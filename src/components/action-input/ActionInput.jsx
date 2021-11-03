@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FormGroup } from 'react-bootstrap';
 import DebounceInput from 'react-debounce-input';
 import { findDOMNode } from 'react-dom';
-import find from 'lodash/find';
+import _ from 'lodash';
 import Left from './Left';
 import Right from './Right';
 import classNames from 'classnames';
@@ -37,7 +37,7 @@ class ActionInput extends Component {
   }
 
   getComponent(children, key) {
-    return find(
+    return _.find(
       React.Children.toArray(children),
       component => component.type.side === key,
     );

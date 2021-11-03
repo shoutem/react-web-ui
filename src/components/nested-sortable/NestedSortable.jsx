@@ -4,13 +4,7 @@ import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import classNames from 'classnames';
 import NodeDraggable from './components/node-draggable/index';
-import get from 'lodash/get';
-import has from 'lodash/has';
-import isEqual from 'lodash/isEqual';
-import isEmpty from 'lodash/isEmpty';
-import includes from 'lodash/includes';
-import reduce from 'lodash/reduce';
-import findIndex from 'lodash/findIndex';
+import _ from 'lodash';
 import './style.scss';
 
 /**
@@ -65,7 +59,7 @@ class NestedSortable extends Component {
 
     if (
       nextProps.selectedId !== this.props.selectedId ||
-      !isEqual(this.props.tree, nextProps.tree)
+      !_.isEqual(this.props.tree, nextProps.tree)
     ) {
       this.updateStateWithProps(nextProps);
     }
@@ -117,11 +111,11 @@ class NestedSortable extends Component {
     const { collapsed, selectedNodePredecessors } = this.state;
     const { collapseAll, expandSelectedSubtree } = this.props;
 
-    if (has(collapsed, nodeId)) {
+    if (_.has(collapsed, nodeId)) {
       return collapsed[nodeId];
     }
 
-    if (expandSelectedSubtree && includes(selectedNodePredecessors, nodeId)) {
+    if (expandSelectedSubtree && _.includes(selectedNodePredecessors, nodeId)) {
       return false;
     }
 
@@ -137,11 +131,11 @@ class NestedSortable extends Component {
   }
 
   createNodeMap(nodes) {
-    if (isEmpty(nodes)) {
+    if (_.isEmpty(nodes)) {
       return {};
     }
 
-    return reduce(
+    return _.reduce(
       nodes,
       (result, node) => ({
         ...result,
@@ -153,11 +147,11 @@ class NestedSortable extends Component {
   }
 
   createParentNodeMap(nodes, parentId) {
-    if (isEmpty(nodes)) {
+    if (_.isEmpty(nodes)) {
       return {};
     }
 
-    return reduce(
+    return _.reduce(
       nodes,
       (result, node) => {
         const newResult = {
@@ -228,7 +222,7 @@ class NestedSortable extends Component {
       const grandParentNode =
         grandParentNodeId && this.state.nodes[grandParentNodeId];
       if (isLast && grandParentNode) {
-        const parentIndex = findIndex(grandParentNode.children, [
+        const parentIndex = _.findIndex(grandParentNode.children, [
           'id',
           dragParentNode.id,
         ]);
@@ -254,8 +248,8 @@ class NestedSortable extends Component {
     const node = sourceNode
       ? sourceNode.children[sourceIndex]
       : tree[sourceIndex];
-    const sourceNodeChildren = get(sourceNode, 'children', tree);
-    const destinationNodeChildren = get(
+    const sourceNodeChildren = _.get(sourceNode, 'children', tree);
+    const destinationNodeChildren = _.get(
       destination,
       'parentNode.children',
       tree,
@@ -302,7 +296,7 @@ class NestedSortable extends Component {
     // adjustments on React DnD.
     return {
       index: destination.index,
-      parentId: get(destination.parentNode, 'id'),
+      parentId: _.get(destination.parentNode, 'id'),
     };
   }
 

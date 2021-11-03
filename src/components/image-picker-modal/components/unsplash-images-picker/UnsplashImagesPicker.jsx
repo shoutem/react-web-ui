@@ -1,9 +1,6 @@
 import React, { PureComponent } from 'react';
 import autoBindReact from 'auto-bind/react';
-import map from 'lodash/map';
-import forEach from 'lodash/forEach';
-import includes from 'lodash/includes';
-import isEmpty from 'lodash/isEmpty';
+import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Button, HelpBlock } from 'react-bootstrap';
 import { LoaderContainer } from '../../../loader';
@@ -63,7 +60,7 @@ export default class UnsplashImagesPicker extends PureComponent {
     const { onImagesSelected } = this.props;
     const { selectedImages } = this.state;
 
-    forEach(selectedImages, image =>
+    _.forEach(selectedImages, (image) =>
       unsplash.trackImageDownload(
         this.unsplashApi,
         image.links.download_location,
@@ -75,14 +72,14 @@ export default class UnsplashImagesPicker extends PureComponent {
   handleSearchInputChange(searchQuery) {
     const searchText = searchQuery.value;
 
-    if (isEmpty(searchText)) {
+    if (_.isEmpty(searchText)) {
       return this.setState({ images: [], searchText: '', selectedImages: [] });
     }
 
     this.setState({ isLoading: true, searchText }, () => {
       unsplash
         .searchImages(this.unsplashApi, searchText, IMAGES_PER_PAGE)
-        .then(images =>
+        .then((images) =>
           this.setState({
             images,
             isLoading: false,
@@ -105,7 +102,7 @@ export default class UnsplashImagesPicker extends PureComponent {
 
     if (newSelectedImages.includes(selectedImage)) {
       newSelectedImages = newSelectedImages.filter(
-        image => image !== selectedImage,
+        (image) => image !== selectedImage,
       );
 
       return this.setState({ selectedImages: newSelectedImages });
@@ -127,7 +124,8 @@ export default class UnsplashImagesPicker extends PureComponent {
     const { localization, maxSelectableImages } = this.props;
     const { images, isLoading, searchText, selectedImages } = this.state;
 
-    const insertButtonDisabled = isEmpty(searchText) || isEmpty(selectedImages);
+    const insertButtonDisabled =
+      _.isEmpty(searchText) || _.isEmpty(selectedImages);
 
     const {
       emptySearchTermTitle,
@@ -167,11 +165,11 @@ export default class UnsplashImagesPicker extends PureComponent {
 
     const shouldShowMaxSelectableImagesText = maxSelectableImages > 1;
     const maxSelectableImagesText = `${maxText} ${maxSelectableImages}`;
-    const shouldRenderSearchResults = !isEmpty(images);
+    const shouldRenderSearchResults = !_.isEmpty(images);
     const shouldRenderEmptySearchPlaceholder =
-      isEmpty(images) && isEmpty(searchText);
+      _.isEmpty(images) && _.isEmpty(searchText);
     const shouldRenderNoSearchResultsPlaceholder =
-      isEmpty(images) && !isEmpty(searchText);
+      _.isEmpty(images) && !_.isEmpty(searchText);
     const shouldRenderEmptyPlaceholder =
       shouldRenderEmptySearchPlaceholder ||
       shouldRenderNoSearchResultsPlaceholder;
@@ -210,7 +208,7 @@ export default class UnsplashImagesPicker extends PureComponent {
             />
           )}
           {shouldRenderSearchResults &&
-            map(images, imageItem => {
+            _.map(images, (imageItem) => {
               const authorLink = `${imageItem.user.links.html}${unsplash.REFERRAL_URL_SUFIX}`;
 
               return (
@@ -218,7 +216,7 @@ export default class UnsplashImagesPicker extends PureComponent {
                   image={imageItem}
                   authorName={imageItem.user.name}
                   authorLink={authorLink}
-                  isSelected={includes(selectedImages, imageItem)}
+                  isSelected={_.includes(selectedImages, imageItem)}
                   localization={imagePreviewLocalization}
                   onSelectImage={this.handleSelectImage}
                   url={imageItem.urls.small}
