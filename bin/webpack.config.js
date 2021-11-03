@@ -5,6 +5,10 @@ module.exports = {
   entry: {
     'web-ui': [path.resolve(__dirname, '../src/styles/index.scss')],
   },
+  externals: {
+    react: true,
+    'react-dom': true,
+  },
   target: 'web',
   output: {
     path: path.resolve(__dirname, '../dist'),
