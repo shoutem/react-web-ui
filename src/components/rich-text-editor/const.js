@@ -2,7 +2,7 @@ import _ from 'lodash';
 import customPlugins from './customPlugins';
 
 export function resolveEditorOptions(allPlugins) {
-  const resolvedPlugins = _.map(allPlugins, (plugin) => {
+  const resolvedPlugins = _.map(allPlugins, plugin => {
     if (
       plugin.name === customPlugins.IMAGESCC_CUSTOM_PLUGIN ||
       plugin.name === customPlugins.EMOJI_CUSTOM_PLUGIN
@@ -12,7 +12,7 @@ export function resolveEditorOptions(allPlugins) {
 
     return plugin.definition;
   });
-  const resolvedCustomPluginButtons = _.map(allPlugins, (plugin) => {
+  const resolvedCustomPluginButtons = _.map(allPlugins, plugin => {
     if (
       plugin.name === customPlugins.IMAGESCC_CUSTOM_PLUGIN ||
       plugin.name === customPlugins.EMOJI_CUSTOM_PLUGIN
@@ -56,6 +56,7 @@ export function resolveEditorOptions(allPlugins) {
       [
         'link',
         'video',
+        'image',
         {
           name: 'imagesCCcustomPlugin',
           dataCommand: 'imagesCCcustomPlugin',
