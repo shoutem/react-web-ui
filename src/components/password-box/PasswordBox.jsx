@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import autoBindReact from 'auto-bind/react';
 import classNames from 'classnames';
 import ActionInput from '../action-input';
 import './style.scss';
@@ -7,8 +8,8 @@ import './style.scss';
 export default class PasswordBox extends Component {
   constructor(props) {
     super(props);
+    autoBindReact(this);
 
-    this.togglePasswordVisibility = this.togglePasswordVisibility.bind(this);
     this.state = { showPassword: false };
   }
 

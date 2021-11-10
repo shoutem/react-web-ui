@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import autoBindReact from 'auto-bind/react';
 import { HelpBlock } from 'react-bootstrap';
 import Dropzone from 'react-dropzone';
 import classNames from 'classnames';
@@ -18,16 +19,7 @@ import './style.scss';
 export default class ImageUploader extends React.Component {
   constructor(props) {
     super(props);
-
-    this.handleUploadFailed = this.handleUploadFailed.bind(this);
-    this.handleUploadSucceeded = this.handleUploadSucceeded.bind(this);
-    this.handleDeleteSucceeded = this.handleDeleteSucceeded.bind(this);
-    this.handleDeleteFailed = this.handleDeleteFailed.bind(this);
-    this.validateDimensions = this.validateDimensions.bind(this);
-    this.validateFileSize = this.validateFileSize.bind(this);
-    this.resizeImage = this.resizeImage.bind(this);
-    this.upload = this.upload.bind(this);
-    this.handleDrop = this.handleDrop.bind(this);
+    autoBindReact(this);
 
     this.state = {
       uploading: false,

@@ -1,5 +1,6 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
+import autoBindReact from 'auto-bind/react';
 import { FormGroup } from 'react-bootstrap';
 import DebounceInput from 'react-debounce-input';
 import { findDOMNode } from 'react-dom';
@@ -13,6 +14,7 @@ import './style.scss';
 class ActionInput extends Component {
   constructor(props) {
     super(props);
+    autoBindReact(this);
 
     this.state = {
       leftActionComponent: null,
@@ -20,9 +22,6 @@ class ActionInput extends Component {
     };
 
     this.actionInputControlRef = createRef();
-    this.focus = this.focus.bind(this);
-    this.getComponent = this.getComponent.bind(this);
-    this.updateComponentsFromProps = this.updateComponentsFromProps.bind(this);
   }
 
   componentWillMount() {

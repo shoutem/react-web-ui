@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import autoBindReact from 'auto-bind/react';
 import { MenuItem } from 'react-bootstrap';
 import Dropdown from '../dropdown';
 import Checkbox from '../checkbox';
@@ -10,13 +11,7 @@ import './style.scss';
 export default class MultiselectDropdown extends Component {
   constructor(props) {
     super(props);
-
-    this.handleItemSelected = this.handleItemSelected.bind(this);
-    this.handleSelectionChanged = this.handleSelectionChanged.bind(this);
-    this.handleSelectNone = this.handleSelectNone.bind(this);
-    this.renderMenuItem = this.renderMenuItem.bind(this);
-    this.renderSelectNoneOption = this.renderSelectNoneOption.bind(this);
-    this.handleToggle = this.handleToggle.bind(this);
+    autoBindReact(this);
 
     const { selectedValues } = props;
 

@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import autoBindReact from 'auto-bind/react';
 import { FormGroup, FormControl } from 'react-bootstrap';
 
 export default class EditableTableCell extends Component {
   constructor(props) {
     super(props);
-
-    this.handleChange = this.handleChange.bind(this);
-    this.renderFormGroup = this.renderFormGroup.bind(this);
-    this.renderStaticFormControl = this.renderStaticFormControl.bind(this);
+    autoBindReact(this);
   }
 
   handleChange(event) {

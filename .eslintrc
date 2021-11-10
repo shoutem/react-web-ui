@@ -10,6 +10,9 @@
       "jsx": true
     }
   },
+  "plugins": [
+    "flow-vars"
+  ],
   "env": {
     "browser": true
   },
@@ -26,5 +29,14 @@
     "beforeEach": false,
     "afterEach": false
   },
-  "rules": {}
+  "rules": {},
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": [
+          "src"
+        ]
+      }
+    }
+  }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import autoBindReact from 'auto-bind/react';
 import classNames from 'classnames';
 import _ from 'lodash';
 import './style.scss';
@@ -7,9 +8,7 @@ import './style.scss';
 export default class Switch extends Component {
   constructor(props) {
     super(props);
-
-    this.handleToggleSwitch = this.handleToggleSwitch.bind(this);
-    this.renderSwitchButton = this.renderSwitchButton.bind(this);
+    autoBindReact(this);
 
     this.state = {
       switchId: _.uniqueId('switch__'),

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import autoBindReact from 'auto-bind/react';
 import _ from 'lodash';
 import { Pager } from 'react-bootstrap';
 import FontIcon from '../font-icon';
@@ -51,14 +52,7 @@ function calculatePageLabel(currentPage, pageCount) {
 export default class Paging extends Component {
   constructor(props) {
     super(props);
-
-    this.checkData = this.checkData.bind(this);
-    this.reset = this.reset.bind(this);
-    this.getPagingInfo = this.getPagingInfo.bind(this);
-    this.hasPreviousPage = this.hasPreviousPage.bind(this);
-    this.hasNextPage = this.hasNextPage.bind(this);
-    this.handleNextPageClick = this.handleNextPageClick.bind(this);
-    this.handlePreviousPageClick = this.handlePreviousPageClick.bind(this);
+    autoBindReact(this);
   }
 
   componentWillMount() {
