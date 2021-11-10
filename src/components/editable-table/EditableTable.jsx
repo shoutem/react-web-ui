@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import autoBindReact from 'auto-bind/react';
 import _ from 'lodash';
 import classNames from 'classnames';
 import { ControlLabel } from 'react-bootstrap';
@@ -26,14 +27,7 @@ function resolveRowKeyGenerator(rowKeyIdentifier) {
 export default class EditableTable extends Component {
   constructor(props) {
     super(props);
-
-    this.addNewRow = this.addNewRow.bind(this);
-    this.closeNewRow = this.closeNewRow.bind(this);
-    this.handleDeleteRow = this.handleDeleteRow.bind(this);
-    this.handleUpdateRow = this.handleUpdateRow.bind(this);
-    this.handleAddRow = this.handleAddRow.bind(this);
-    this.renderTableRow = this.renderTableRow.bind(this);
-    this.renderTableRows = this.renderTableRows.bind(this);
+    autoBindReact(this);
 
     const { rowDescriptors, rowKeyIdentifier } = props;
     const requiredProps = extractRequiredProps(rowDescriptors);

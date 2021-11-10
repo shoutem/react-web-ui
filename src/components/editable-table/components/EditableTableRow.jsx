@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import autoBindReact from 'auto-bind/react';
 import _ from 'lodash';
 import classNames from 'classnames';
 import EditableTableCell from './EditableTableCell';
@@ -8,18 +9,12 @@ import EditableTableActionsCell from './EditableTableActionsCell';
 export default class EditableTableRow extends Component {
   constructor(props) {
     super(props);
+    autoBindReact(this);
 
     this.state = {
       row: props.row,
       inEditMode: props.isEditMode,
     };
-
-    this.handleRowClick = this.handleRowClick.bind(this);
-    this.handleSaveClick = this.handleSaveClick.bind(this);
-    this.handleEditClick = this.handleEditClick.bind(this);
-    this.handleDeleteClick = this.handleDeleteClick.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.renderTableCell = this.renderTableCell.bind(this);
   }
 
   handleEditClick() {
