@@ -2,14 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import autoBindReact from 'auto-bind/react';
 import _ from 'lodash';
-import i18next from 'i18next';
 import { HelpBlock } from 'react-bootstrap';
-import { LoaderContainer } from '@shoutem/react-web-ui';
 import Dropzone from 'react-dropzone';
 import classNames from 'classnames';
 import FilePreview from '../file-preview';
 import FileUploadPlaceholder from '../file-upload-placeholder';
-import LOCALIZATION from './localization';
+import { LoaderContainer } from '../loader';
 import './style.scss';
 
 export default class FileUploader extends React.Component {
@@ -40,9 +38,7 @@ export default class FileUploader extends React.Component {
     const { maxFileSize } = this.props;
 
     if (file.size > maxFileSize) {
-      return i18next.t(LOCALIZATION.FILE_MAX_SIZE_ERROR, {
-        maxFileSize: maxFileSize / 1000000,
-      });
+      return 'i18next.t(LOCALIZATION.FILE_MAX_SIZE_ERROR';
     }
     return null;
   }
@@ -58,7 +54,9 @@ export default class FileUploader extends React.Component {
       return assetManager
         .uploadFile(resolvedPath, file)
         .then(path => resolve(path))
-        .catch(() => reject(i18next.t(LOCALIZATION.FILE_UPLOAD_FAILED_ERROR)));
+        .catch(() =>
+          reject('i18next.t(LOCALIZATION.FILE_UPLOAD_FAILED_ERROR)'),
+        );
     });
   }
 
@@ -107,13 +105,16 @@ export default class FileUploader extends React.Component {
   }
 
   handleDropRejected() {
-    this.setState({ error: i18next.t(LOCALIZATION.FILE_REJECTED_ERROR) });
+    const { localization } = this.props;
+
+    this.setState({ error: localization.fileRejectedError });
   }
 
   handleDeleteFailed() {
-    const error = i18next.t(LOCALIZATION.FILE_DELETE_FAILED_ERROR);
+    const { localization } = this.props;
+
     this.setState({
-      error,
+      error: localization.fileDeleteError,
       inProgress: false,
     });
   }
@@ -135,10 +136,14 @@ export default class FileUploader extends React.Component {
   }
 
   renderDropzoneContent() {
-    const { src, canBeDeleted } = this.props;
+    const { src, canBeDeleted, localization } = this.props;
 
     if (!src) {
-      return <FileUploadPlaceholder />;
+      return (
+        <FileUploadPlaceholder
+          uploadPlaceholderMessage={localization.fileUploadMessage}
+        />
+      );
     }
 
     return (
@@ -193,6 +198,10 @@ FileUploader.propTypes = {
    */
   className: PropTypes.string,
   /**
+   * Strings displayed to end users
+   */
+  localization: PropTypes.object,
+  /**
    *  Url to the src
    */
   src: PropTypes.string,
@@ -246,6 +255,13 @@ FileUploader.propTypes = {
 FileUploader.defaultProps = {
   maxFileSize: 10000000,
   onError: () => {},
+  localization: {
+    fileUploadError: 'File upload failed.',
+    fileMaxSizeError: 'Max allowed file size is {{maxFileSize}}MB!',
+    fileRejectedError: 'File rejected',
+    fileDeleteError: 'Delete failed.',
+    fileUploadMessage: 'Choose a file or drag it here.',
+  },
   customValidator: _.noop,
   showValidationError: true,
   canBeDeleted: true,

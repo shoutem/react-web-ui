@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import autoBindReact from 'auto-bind/react';
 import Uri from 'urijs';
 import classnames from 'classnames';
-import { FontIcon } from '@shoutem/react-web-ui';
+import FontIcon from '../font-icon';
 import './style.scss';
 
 export default class FilePreview extends React.Component {
