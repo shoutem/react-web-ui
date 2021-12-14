@@ -35,16 +35,25 @@ export default class FileUploader extends React.Component {
   }
 
   validateFileSize(file) {
-    const { maxFileSize } = this.props;
+    const { localization, maxFileSize } = this.props;
+
+    const { fileMaxSizeError } = localization;
 
     if (file.size > maxFileSize) {
-      return 'i18next.t(LOCALIZATION.FILE_MAX_SIZE_ERROR';
+      return fileMaxSizeError;
     }
     return null;
   }
 
   uploadFile(file) {
-    const { assetManager, folderName, resolveFilename } = this.props;
+    const {
+      assetManager,
+      folderName,
+      localization,
+      resolveFilename,
+    } = this.props;
+
+    const { fileUploadError } = localization;
 
     const resolvedFilename = resolveFilename(file);
     const resolvedFolderPath = folderName ? `${folderName}/` : '';
@@ -54,9 +63,7 @@ export default class FileUploader extends React.Component {
       return assetManager
         .uploadFile(resolvedPath, file)
         .then(path => resolve(path))
-        .catch(() =>
-          reject('i18next.t(LOCALIZATION.FILE_UPLOAD_FAILED_ERROR)'),
-        );
+        .catch(() => reject(fileUploadError));
     });
   }
 
@@ -99,7 +106,7 @@ export default class FileUploader extends React.Component {
 
     onDrop();
 
-    this.upload(files[0])
+    this.upload(file)
       .then(this.handleUploadSucceeded)
       .catch(this.handleUploadFailed);
   }
@@ -157,6 +164,7 @@ export default class FileUploader extends React.Component {
 
   render() {
     const { className, showValidationError, helpText, accept } = this.props;
+    const { error } = this.state;
 
     const classes = classNames(className, 'file-uploader');
 
@@ -171,10 +179,10 @@ export default class FileUploader extends React.Component {
         >
           {dropzoneProps => this.renderDropzoneContent(dropzoneProps)}
         </Dropzone>
-        {showValidationError && this.state.error && (
-          <div className="text-error">{this.state.error}</div>
+        {showValidationError && error && (
+          <div className="text-error">{error}</div>
         )}
-        {helpText && !this.state.error && <HelpBlock>{helpText}</HelpBlock>}
+        {helpText && !error && <HelpBlock>{helpText}</HelpBlock>}
       </LoaderContainer>
     );
   }
@@ -254,7 +262,7 @@ FileUploader.propTypes = {
 
 FileUploader.defaultProps = {
   maxFileSize: 10000000,
-  onError: () => {},
+  onError: () => { },
   localization: {
     fileUploadError: 'File upload failed.',
     fileMaxSizeError: 'Max allowed file size is {{maxFileSize}}MB!',

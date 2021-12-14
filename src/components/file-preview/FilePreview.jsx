@@ -12,10 +12,6 @@ export default class FilePreview extends React.Component {
     autoBindReact(this);
   }
 
-  handleClick(event) {
-    event.stopPropagation();
-  }
-
   render() {
     const { src, className, canBeDeleted, onDeleteClick } = this.props;
 
@@ -26,7 +22,7 @@ export default class FilePreview extends React.Component {
     });
 
     return (
-      <div className={classes} onClick={this.handleClick}>
+      <div className={classes}>
         <div>
           <FontIcon name="file-uploaded" size="24px" />
           <div>{filename}</div>
