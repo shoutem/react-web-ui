@@ -22,25 +22,27 @@ export default class FileUploader extends React.Component {
   }
 
   handleUploadFailed(errorMessage) {
+    const { onError } = this.props;
+
     this.setState({
       error: errorMessage,
       inProgress: false,
     });
-    this.props.onError(errorMessage);
+    onError(errorMessage);
   }
 
   handleUploadSucceeded(fileUrl) {
-    this.props.onUploadSuccess(fileUrl);
+    const { onUploadSuccess } = this.props;
+
+    onUploadSuccess(fileUrl);
     this.setState({ inProgress: false });
   }
 
   validateFileSize(file) {
     const { localization, maxFileSize } = this.props;
 
-    const { fileMaxSizeError } = localization;
-
     if (file.size > maxFileSize) {
-      return fileMaxSizeError;
+      return localization.fileMaxSizeError;
     }
     return null;
   }
@@ -53,8 +55,6 @@ export default class FileUploader extends React.Component {
       resolveFilename,
     } = this.props;
 
-    const { fileUploadError } = localization;
-
     const resolvedFilename = resolveFilename(file);
     const resolvedFolderPath = folderName ? `${folderName}/` : '';
     const resolvedPath = resolvedFolderPath + resolvedFilename;
@@ -63,7 +63,7 @@ export default class FileUploader extends React.Component {
       return assetManager
         .uploadFile(resolvedPath, file)
         .then(path => resolve(path))
-        .catch(() => reject(fileUploadError));
+        .catch(() => reject(localization.fileUploadError));
     });
   }
 
@@ -164,12 +164,12 @@ export default class FileUploader extends React.Component {
 
   render() {
     const { className, showValidationError, helpText, accept } = this.props;
-    const { error } = this.state;
+    const { error, inProgress } = this.state;
 
     const classes = classNames(className, 'file-uploader');
 
     return (
-      <LoaderContainer isLoading={this.state.inProgress} className={classes}>
+      <LoaderContainer isLoading={inProgress} className={classes}>
         <Dropzone
           className="file-uploader__dropzone"
           onDrop={this.handleDrop}
