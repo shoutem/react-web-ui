@@ -31,6 +31,7 @@ import StepIndicator from './components/step-indicator';
 import RichTextEditor from './components/rich-text-editor';
 import EmojiPicker from './components/emoji-picker';
 import ImagePickerModal from './components/image-picker-modal';
+import FileUploader from './components/file-uploader';
 
 export {
   ActionInput,
@@ -44,6 +45,7 @@ export {
   EmojiPicker,
   EmptyResourcePlaceholder,
   EditableTable,
+  FileUploader,
   FontIcon,
   FontIconPopover,
   FormInput,
