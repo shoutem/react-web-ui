@@ -157,6 +157,7 @@ export default class FileUploader extends React.Component {
       <FilePreview
         src={src}
         canBeDeleted={canBeDeleted}
+        noFileErrorMessage={localization.noFileErrorMessage}
         onDeleteClick={this.handleDeleteClick}
       />
     );
@@ -268,6 +269,7 @@ FileUploader.defaultProps = {
     fileMaxSizeError: 'Max allowed file size is {{maxFileSize}}MB!',
     fileRejectedError: 'File rejected',
     fileDeleteError: 'Delete failed.',
+    noFileErrorMessage: 'No file',
     fileUploadMessage: 'Choose a file or drag it here.',
   },
   customValidator: _.noop,
