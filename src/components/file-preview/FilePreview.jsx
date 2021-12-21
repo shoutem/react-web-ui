@@ -13,9 +13,15 @@ export default class FilePreview extends React.Component {
   }
 
   render() {
-    const { src, className, canBeDeleted, onDeleteClick } = this.props;
+    const {
+      src,
+      className,
+      canBeDeleted,
+      onDeleteClick,
+      noFileErrorMessage,
+    } = this.props;
 
-    const filename = src ? new Uri(src).filename() : 'No file.';
+    const filename = src ? new Uri(src).filename() : noFileErrorMessage;
 
     const classes = classnames(className, 'file-preview', {
       'is-deletable': canBeDeleted,
@@ -56,4 +62,8 @@ FilePreview.propTypes = {
    * Flag indicating whether file can be deleted
    */
   canBeDeleted: PropTypes.bool,
+  /**
+   * No file error message
+   */
+  noFileErrorMessage: PropTypes.string,
 };
