@@ -9,7 +9,7 @@ function getHoverCenter(hoverBoundingRect, isHorizontal) {
 
 function getOffset(clientOffset, hoverBoundingRect, isHorizontal) {
   return isHorizontal
-    ? (clientOffset.x = hoverBoundingRect.left)
+    ? clientOffset.x - hoverBoundingRect.left
     : clientOffset.y - hoverBoundingRect.top;
 }
 
