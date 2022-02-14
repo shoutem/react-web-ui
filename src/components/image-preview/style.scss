@@ -20,7 +20,7 @@
 
     &.image-preview__close .se-icon,
     &.image-preview__delete .se-icon {
-      display: block;
+      display: table-cell;
     }
   }
 
@@ -60,31 +60,20 @@
 .image-preview-medium {
   width: 96px;
   height: 96px;
-
-  .se-icon {
-    padding-top: 24px;
-  }
 }
 
 .image-preview-large {
   width: 265px;
   height: 265px;
-
-  .se-icon {
-    padding-top: 108px;
-  }
-}
-
-.image-preview-custom {
-  .se-icon {
-    padding-top: calc(50% - 24px);
-  }
 }
 
 .image-preview__delete {
+  display: table-cell;
   position: relative;
 
   .se-icon {
+    display: table-cell;
+    vertical-align: middle;
     font-size: 24px;
     line-height: 48px;
     color: #ffffff;

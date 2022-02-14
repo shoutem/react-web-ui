@@ -1,11 +1,12 @@
 .checkbox-children {
+  margin-top: 2px;
   color: #444f6c;
   flex: 1;
 }
 
 .checkbox.se-checkbox label {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .checkbox.se-checkbox .checkbox-icon {

@@ -313,6 +313,7 @@ class NestedSortable extends Component {
             onDragAndDropStart={this.onDragAndDropStart}
             onDragAndDropComplete={this.onDragAndDropComplete}
             isDraggable={item.isDraggable}
+            doesAllowDrop={item.doesAllowDrop}
             isNestable={item.isNestable}
             hasUpdates={item.hasUpdates}
             nodeHeaderTemplate={this.props.nodeHeaderTemplate}
@@ -335,6 +336,7 @@ NestedSortable.propTypes = {
       isNestable: PropTypes.bool,
       hasUpdates: PropTypes.bool,
       isDraggable: PropTypes.bool,
+      doesAllowDrop: PropTypes.bool,
       isRoot: PropTypes.bool,
       disableDrop: PropTypes.bool,
       children: PropTypes.array,

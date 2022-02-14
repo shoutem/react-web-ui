@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { DropTarget } from 'react-dnd';
 import {
   types,
@@ -32,10 +33,16 @@ const nodeTarget = {
     const hoverId = props.item.id;
     const hoverParentId = props.parentId;
     const doesParentAllowDrop = props.doesParentAllowDrop;
+    const doesAllowDrop = props.item.doesAllowDrop;
 
     // Don't look for every target container, only first, non-greedy
     const isOverCurrent = monitor.isOver({ shallow: true });
     if (!isOverCurrent) {
+      return;
+    }
+
+    // don't allow drop if doesAllowDrop is false
+    if (!_.isUndefined(doesAllowDrop) && !doesAllowDrop) {
       return;
     }
 
