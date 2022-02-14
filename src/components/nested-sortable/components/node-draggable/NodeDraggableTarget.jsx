@@ -42,6 +42,8 @@ const nodeTarget = {
     }
 
     // don't allow drop if doesAllowDrop is false
+    // as we are unable to set doesAllowDrop to be true by default
+    // we need to check if isUndefined as we are reacting only on "false"
     if (!_.isUndefined(doesAllowDrop) && !doesAllowDrop) {
       return;
     }
