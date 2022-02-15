@@ -98,41 +98,6 @@ export default class MultiselectDropdown extends Component {
     );
   }
 
-  renderSelectNoneOption() {
-    const { selectedValues } = this.state;
-    const { selectNoneText } = this.props;
-
-    const checked = _.isEmpty(selectedValues);
-
-    return (
-      <Checkbox
-        checked={checked}
-        className="multiselect-dropdown__checkbox"
-        onChange={this.handleSelectNone}
-      >
-        {selectNoneText}
-      </Checkbox>
-    );
-  }
-
-  renderSelectAllOption() {
-    const { selectAllText, options } = this.props;
-    const { selectedValues } = this.state;
-
-    const values = _.map(options, 'value');
-    const checked = _.isEmpty(_.xor(selectedValues, values));
-
-    return (
-      <Checkbox
-        checked={checked}
-        className="multiselect-dropdown__checkbox"
-        onChange={this.handleSelectAll}
-      >
-        {selectAllText}
-      </Checkbox>
-    );
-  }
-
   render() {
     const { selectedValues } = this.state;
     const {
@@ -142,6 +107,9 @@ export default class MultiselectDropdown extends Component {
       disabled,
       showSelectNoneOption,
       showSelectAllOption,
+      selectNoneText,
+      selectAllText,
+      selectText,
     } = this.props;
 
     const dropdownDisabled = disabled || _.isEmpty(options);
@@ -151,6 +119,8 @@ export default class MultiselectDropdown extends Component {
       displayLabelMaxSelectedOptions,
       emptyText,
     );
+
+    const hasSelectOptions = showSelectAllOption || showSelectNoneOption;
 
     return (
       <Dropdown
@@ -163,10 +133,27 @@ export default class MultiselectDropdown extends Component {
         <Dropdown.Menu>
           <MenuItem>{selectedOptionLabel}</MenuItem>
           <MenuItem divider />
-          {showSelectAllOption && this.renderSelectAllOption()}
-          {showSelectNoneOption && this.renderSelectNoneOption()}
-          {(showSelectAllOption || showSelectNoneOption) && (
-            <MenuItem divider />
+          {hasSelectOptions && (
+            <>
+              <div className="select-options">
+                <div>{selectText}</div>
+                {showSelectAllOption && (
+                  <div className="select-option" onClick={this.handleSelectAll}>
+                    {selectAllText}
+                  </div>
+                )}
+                {showSelectAllOption && showSelectNoneOption && <span>,</span>}
+                {showSelectNoneOption && (
+                  <div
+                    className="select-option"
+                    onClick={this.handleSelectNone}
+                  >
+                    {selectNoneText}
+                  </div>
+                )}
+              </div>
+              <MenuItem divider />
+            </>
           )}
           <div className="multiselect-dropdown__items">
             {_.map(options, this.renderMenuItem)}
@@ -225,6 +212,7 @@ MultiselectDropdown.propTypes = {
   /**
    * Label for `Select all` option
    */
+  selectText: PropTypes.string,
   selectNoneText: PropTypes.string,
   selectAllText: PropTypes.string,
   onToggle: PropTypes.func,
@@ -233,5 +221,6 @@ MultiselectDropdown.propTypes = {
 MultiselectDropdown.defaultProps = {
   selectedValues: [],
   options: [],
+  selectText: 'Select',
   emptyText: 'None',
 };
