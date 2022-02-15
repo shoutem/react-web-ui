@@ -48,9 +48,9 @@ export default class MultiselectDropdown extends Component {
 
   handleSelectAll() {
     const { options } = this.props;
-    const values = _.map(options, 'value');
+    const selectedValues = _.map(options, 'value');
 
-    this.setState({ selectedValues: values });
+    this.setState({ selectedValues });
   }
 
   handleSelectionChanged() {
@@ -199,19 +199,8 @@ MultiselectDropdown.propTypes = {
    * Flag indicating whether dropdown is disabled
    */
   disabled: PropTypes.bool,
-  /**
-   * If true, `Select none` option will be rendered above other options and separated with divider.
-   * When empty option is selected, all other options are disabled and onSelectionChanged
-   * handler is called with empty array.
-   */
   showSelectNoneOption: PropTypes.bool,
-  /**
-   * Label for `Select none` option
-   */
   showSelectAllOption: PropTypes.bool,
-  /**
-   * Label for `Select all` option
-   */
   selectText: PropTypes.string,
   selectNoneText: PropTypes.string,
   selectAllText: PropTypes.string,
