@@ -61,6 +61,10 @@ export function imageUploadError() {
   return getMessage(IMAGE_UPLOAD_ERROR);
 }
 
+export function imageUploadInvalidType() {
+  return getMessage(IMAGE_UPLOAD_INVALID_TYPE);
+}
+
 export function imagePreviewDeleteError() {
   return getMessage(IMAGE_PREVIEW_DELETE_ERROR);
 }
