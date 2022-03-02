@@ -27,6 +27,8 @@ const ACCEPT_TYPES = {
   PNG: 'image/png',
 };
 
+const shouldCheckImageType = type !== ACCEPT_TYPES.ANY;
+
 export default class ImageUploader extends React.Component {
   constructor(props) {
     super(props);
@@ -155,14 +157,14 @@ export default class ImageUploader extends React.Component {
   }
 
   handleDrop(files) {
-    const { acceptType, checkImageType } = this.props;
+    const { acceptType } = this.props;
   
     if (files && files.length > 0) {
       this.setState({ uploading: true, error: null });
   
       const currentFile = files[0];
   
-      if (checkImageType && currentFile.type !== acceptType) {
+      if (shouldCheckImageType && currentFile.type !== acceptType) {
         return this.handleUploadFailed(imageUploadInvalidType());
       }
   
@@ -253,10 +255,6 @@ ImageUploader.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Flag indicating whether image type should be checked before uploading
-   */
-  checkImageType: PropTypes.bool,
-  /**
    * Expected image height in pixels
    */
   height: PropTypes.number,
@@ -328,7 +326,6 @@ ImageUploader.defaultProps = {
   acceptType: ACCEPT_TYPES.ANY,
   autoResize: true,
   canBeDeleted: true,
-  checkImageType: false,
   icon: 'add',
   maxImageSize: 10000000,
   previewSize: 'small',
