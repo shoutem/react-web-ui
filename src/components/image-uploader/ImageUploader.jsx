@@ -7,7 +7,11 @@ import Dropzone from 'react-dropzone';
 import classNames from 'classnames';
 import { LoaderContainer } from '../loader';
 import ImagePreview from '../image-preview';
-import { imageSizeTooBigError, imageUploadError } from './errors';
+import {
+  imageSizeTooBigError,
+  imageUploadError,
+  imageUploadInvalidType,
+} from './errors';
 import {
   resizeImage as resizeImageService,
   calculateValidImageDimensions,
@@ -15,6 +19,17 @@ import {
   shouldResizeImage,
 } from './image';
 import './style.scss';
+
+const ACCEPT_TYPES = {
+  ANY: 'image/*',
+  JPG: 'image/jpg',
+  JPEG: 'image/jpeg',
+  PNG: 'image/png',
+};
+
+function shouldCheckImageType(type) {
+  return type !== ACCEPT_TYPES.ANY;
+} 
 
 export default class ImageUploader extends React.Component {
   constructor(props) {
@@ -144,10 +159,18 @@ export default class ImageUploader extends React.Component {
   }
 
   handleDrop(files) {
+    const { acceptType } = this.props;
+  
     if (files && files.length > 0) {
       this.setState({ uploading: true, error: null });
-
-      this.upload(files[0]).then(
+  
+      const currentFile = files[0];
+  
+      if (shouldCheckImageType(acceptType) && currentFile.type !== acceptType) {
+        return this.handleUploadFailed(imageUploadInvalidType());
+      }
+  
+      this.upload(currentFile).then(
         this.handleUploadSucceeded,
         this.handleUploadFailed,
       );
@@ -202,54 +225,86 @@ export default class ImageUploader extends React.Component {
 
 ImageUploader.propTypes = {
   /**
+   * Object containing methods for uploading, listing, and deleting files on cloud
+   */
+   assetManager: PropTypes.shape({
+    deleteFile: PropTypes.func.isRequired,
+    uploadFile: PropTypes.func.isRequired,
+    listFolder: PropTypes.func.isRequired,
+  }).isRequired,
+  /**
+   * Path where to upload file
+   */
+  folderName: PropTypes.string.isRequired,
+  /**
    *  Callback invoked when image is uploaded
    */
   onUploadSuccess: PropTypes.func.isRequired,
   /**
-   *  Callback invoked when upload fails
+   * Accepted image type, used when checking image type
    */
-  onError: PropTypes.func,
+  acceptType: PropTypes.string,
+  /**
+   * Flag indicating whether image should automatically be resized if it's not in correct dimensions
+   */
+  autoResize: PropTypes.bool,
+  /**
+   * Flag indicating whether image can be deleted
+   */
+  canBeDeleted: PropTypes.bool,
   /**
    * Additional classes to apply
    */
   className: PropTypes.string,
   /**
-   *  Id of the image
+   * Expected image height in pixels
    */
-  id: PropTypes.string,
+  height: PropTypes.number,
   /**
-   *  Url to the preview image
+   * Help text positioned below dropzone
    */
-  preview: PropTypes.string,
-  /**
-   * Min allowed image width in pixels
-   */
-  minWidth: PropTypes.number,
-  /**
-   * Min allowed image height in pixels
-   */
-  minHeight: PropTypes.number,
-  /**
-   * Max allowed image width in pixels
-   */
-  maxWidth: PropTypes.number,
-  /**
-   * Max allowed image height in pixels
-   */
-  maxHeight: PropTypes.number,
-  /**
-   * Max allowed image size in bytes
-   */
-  maxImageSize: PropTypes.number,
+  helpText: PropTypes.string,
   /**
    * FontIcon name (add-photo, add...)
    */
   icon: PropTypes.string,
   /**
+   *  Id of the image
+   */
+  id: PropTypes.string,
+  /**
+   * Min allowed image height in pixels
+   */
+  minHeight: PropTypes.number,
+  /**
+   * Min allowed image width in pixels
+   */
+  minWidth: PropTypes.number,
+  /**
+   * Max allowed image size in bytes
+   */
+  maxImageSize: PropTypes.number,
+  /**
+   * Max allowed image height in pixels
+   */
+  maxHeight: PropTypes.number,
+  /**
+   * Max allowed image width in pixels
+   */
+  maxWidth: PropTypes.number,
+  /**
+   * Url to the preview image
+   */
+  preview: PropTypes.string,
+  /**
    * Passed on as a prop to the ImagePreview component,
    * determines image preview block dimensions
    */
   previewSize: PropTypes.string,
+  /**
+   * Customize your file name before the upload
+   */
+  resolveFilename: PropTypes.func,
   /**
    * Flag indicating whether to show validation error in component.
    * If set to false, onError function should be provided for displaying upload error.
@@ -260,50 +315,23 @@ ImageUploader.propTypes = {
    */
   width: PropTypes.number,
   /**
-   * Expected image height in pixels
+   * Callback invoked when upload fails
    */
-  height: PropTypes.number,
-  /**
-   * Help text positioned below dropzone
-   */
-  helpText: PropTypes.string,
-  /**
-   * Object containing methods for uploading, listing, and deleting files on cloud
-   */
-  assetManager: PropTypes.shape({
-    deleteFile: PropTypes.func.isRequired,
-    uploadFile: PropTypes.func.isRequired,
-    listFolder: PropTypes.func.isRequired,
-  }),
-  /**
-   * Path where to upload file
-   */
-  folderName: PropTypes.string,
-  /**
-   * Customize your file name before the upload
-   */
-  resolveFilename: PropTypes.func,
+  onError: PropTypes.func,
   /**
    *  Callback forwarded to ImagePreview component; invoked when existing image is deleted
    */
   onDeleteSuccess: PropTypes.func,
-  /**
-   * Flag indicating whether image can be deleted
-   */
-  canBeDeleted: PropTypes.bool,
-  /**
-   * Flag indicating whether image should automatically be resized if it's not in correct dimensions
-   */
-  autoResize: PropTypes.bool,
 };
 
 ImageUploader.defaultProps = {
-  maxImageSize: 10000000,
-  onError: () => {},
-  icon: 'add',
-  previewSize: 'small',
-  showValidationError: true,
-  canBeDeleted: true,
+  acceptType: ACCEPT_TYPES.ANY,
   autoResize: true,
+  canBeDeleted: true,
+  icon: 'add',
+  maxImageSize: 10000000,
+  previewSize: 'small',
   resolveFilename: file => file.name,
+  showValidationError: true,
+  onError: () => {}, 
 };

@@ -11,6 +11,7 @@ import {
   IMAGE_UPLOAD_HEIGHT_INVALID,
   IMAGE_UPLOAD_SIZE_TOO_BIG,
   IMAGE_UPLOAD_ERROR,
+  IMAGE_UPLOAD_INVALID_TYPE,
   IMAGE_PREVIEW_DELETE_ERROR,
 } from '../const';
 
@@ -37,5 +38,6 @@ export default {
     `Image width must be exactly ${width}px!`,
   [IMAGE_UPLOAD_HEIGHT_INVALID]: ({ height }) =>
     `Image height must be exactly ${height}px!`,
+  [IMAGE_UPLOAD_INVALID_TYPE]: 'File type is invalid.',
   [IMAGE_PREVIEW_DELETE_ERROR]: 'Delete failed.',
 };

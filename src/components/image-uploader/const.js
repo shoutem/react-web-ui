@@ -23,6 +23,8 @@ export const IMAGE_UPLOAD_HEIGHT_INVALID =
 export const IMAGE_UPLOAD_SIZE_TOO_BIG =
   'shoutem.builder.image-uploader.size-small';
 export const IMAGE_UPLOAD_ERROR = 'shoutem.builder.image-uploader.upload-fail';
+export const IMAGE_UPLOAD_INVALID_TYPE =
+  'shoutem.builder.image-uploader.invalid-type';
 
 export const IMAGE_PREVIEW_DELETE_ERROR =
   'shoutem.builder.image-preview.delete-error';
