@@ -27,7 +27,9 @@ const ACCEPT_TYPES = {
   PNG: 'image/png',
 };
 
-const shouldCheckImageType = type !== ACCEPT_TYPES.ANY;
+function shouldCheckImageType(type) {
+  return type !== ACCEPT_TYPES.ANY;
+} 
 
 export default class ImageUploader extends React.Component {
   constructor(props) {
@@ -164,7 +166,7 @@ export default class ImageUploader extends React.Component {
   
       const currentFile = files[0];
   
-      if (shouldCheckImageType && currentFile.type !== acceptType) {
+      if (shouldCheckImageType(acceptType) && currentFile.type !== acceptType) {
         return this.handleUploadFailed(imageUploadInvalidType());
       }
   
