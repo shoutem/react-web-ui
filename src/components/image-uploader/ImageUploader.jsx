@@ -159,7 +159,7 @@ export default class ImageUploader extends React.Component {
   }
 
   handleDrop(files) {
-    const { acceptType } = this.props;
+    const { acceptType, onError } = this.props;
   
     if (files && files.length > 0) {
       this.setState({ uploading: true, error: null });
@@ -167,7 +167,9 @@ export default class ImageUploader extends React.Component {
       const currentFile = files[0];
   
       if (shouldCheckImageType(acceptType) && currentFile.type !== acceptType) {
-        return this.handleUploadFailed(imageUploadInvalidType());
+        this.setState({ uploading: false })
+
+        return onError(imageUploadInvalidType());
       }
   
       this.upload(currentFile).then(
