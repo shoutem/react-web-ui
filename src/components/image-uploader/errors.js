@@ -11,6 +11,7 @@ import {
   IMAGE_UPLOAD_HEIGHT_INVALID,
   IMAGE_UPLOAD_SIZE_TOO_BIG,
   IMAGE_UPLOAD_ERROR,
+  IMAGE_UPLOAD_INVALID_TYPE,
   IMAGE_PREVIEW_DELETE_ERROR,
 } from './const';
 
@@ -59,6 +60,10 @@ export function imageSizeTooBigError(maxSize) {
 
 export function imageUploadError() {
   return getMessage(IMAGE_UPLOAD_ERROR);
+}
+
+export function imageUploadInvalidType() {
+  return getMessage(IMAGE_UPLOAD_INVALID_TYPE);
 }
 
 export function imagePreviewDeleteError() {
