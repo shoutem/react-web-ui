@@ -149,8 +149,8 @@ export default class EditableTable extends Component {
         <table className="table editable-table__table">
           <thead>
             <tr>
-              {_.map(headers, header => (
-                <th key={header}>
+              {_.map(headers, (header, index) => (
+                <th key={index}>
                   <ControlLabel>{header}</ControlLabel>
                 </th>
               ))}
