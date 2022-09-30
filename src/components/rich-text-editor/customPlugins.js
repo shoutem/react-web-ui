@@ -3,7 +3,7 @@
 const IMAGESCC_CUSTOM_PLUGIN = 'imagesCCcustomPlugin';
 const EMOJI_CUSTOM_PLUGIN = 'emojiCustomPlugin';
 
-const initImagesCC = (onImagesButtonClick) => ({
+const initImagesCC = onImagesButtonClick => ({
   definition: {
     name: IMAGESCC_CUSTOM_PLUGIN,
     display: 'command',
@@ -20,7 +20,7 @@ const initImagesCC = (onImagesButtonClick) => ({
   },
 });
 
-const initEmojiPicker = (onEmojiButtonClick) => ({
+const initEmojiPicker = onEmojiButtonClick => ({
   definition: {
     name: EMOJI_CUSTOM_PLUGIN,
     display: 'command',
