@@ -4,12 +4,12 @@ import classNames from 'classnames';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import SunEditor from 'suneditor-react';
-import 'suneditor/dist/css/suneditor.min.css';
 import { unsplash } from '../../services';
 import EmojiPicker from '../emoji-picker';
 import ImagePickerModal from '../image-picker-modal';
 import { resolveEditorOptions } from './const';
 import customPlugins from './customPlugins';
+import 'suneditor/dist/css/suneditor.min.css';
 import './style.scss';
 
 const EMOJI_PICKER_STYLE = {
@@ -86,7 +86,7 @@ export default class RichTextEditor extends Component {
     const { onChange } = this.props;
     const { rteValue } = this.state;
 
-    const imagesHtml = _.map(images, (selectedImage) => {
+    const imagesHtml = _.map(images, selectedImage => {
       const image = {
         id: _.get(selectedImage, 'id'),
         user: {
@@ -99,7 +99,6 @@ export default class RichTextEditor extends Component {
       return unsplash.imageWithDescriptionHtml(image);
     });
     const imagesHtmlString = imagesHtml.join('');
-
 
     this.setState({ rteValue: rteValue + imagesHtmlString }, () => {
       onChange(rteValue + imagesHtmlString);
@@ -115,9 +114,12 @@ export default class RichTextEditor extends Component {
     this.emojiPickerRef.current.hide();
   }
 
+  handleSunEditorInstance(suneditor) {
+    this.editorRef.current = suneditor;
+  }
+
   render() {
     const {
-      customPluginButtons,
       enableImageAlign,
       enableImageDescription,
       enableImageFormatting,
@@ -125,7 +127,6 @@ export default class RichTextEditor extends Component {
       enableVideoAlign,
       imagePickerLocalization,
       imagePickerOptions,
-      onChange,
       ...otherProps
     } = this.props;
     const { rteValue, showImagePickerModal } = this.state;
@@ -157,7 +158,7 @@ export default class RichTextEditor extends Component {
         )}
         <SunEditor
           {...otherProps}
-          ref={this.editorRef}
+          getSunEditorInstance={this.handleSunEditorInstance}
           setContents={rteValue}
           onClick={this.handleHideEmojiPicker}
           onChange={this.handleValueChanged}
