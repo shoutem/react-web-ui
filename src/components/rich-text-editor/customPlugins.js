@@ -4,38 +4,17 @@ const IMAGESCC_CUSTOM_PLUGIN = 'imagesCCcustomPlugin';
 const EMOJI_CUSTOM_PLUGIN = 'emojiCustomPlugin';
 
 const initImagesCC = onImagesButtonClick => ({
-  definition: {
-    name: IMAGESCC_CUSTOM_PLUGIN,
-    display: 'command',
-    add: () => {},
-    action: onImagesButtonClick,
-  },
-  toolbarComponent: {
-    name: IMAGESCC_CUSTOM_PLUGIN,
-    dataCommand: IMAGESCC_CUSTOM_PLUGIN,
-    title: 'Image',
-    dataDisplay: 'command',
-    innerHTML:
-      '<span class="font-icon se-icon se-icon-imagecreativecommons" style="font-size: 24px;"></span>',
-  },
+  name: IMAGESCC_CUSTOM_PLUGIN,
+  display: 'command',
+  add: () => {},
+  action: onImagesButtonClick,
 });
 
 const initEmojiPicker = onEmojiButtonClick => ({
-  definition: {
-    name: EMOJI_CUSTOM_PLUGIN,
-    display: 'command',
-    add: () => {},
-    action: onEmojiButtonClick,
-  },
-  toolbarComponent: {
-    name: EMOJI_CUSTOM_PLUGIN,
-    dataCommand: EMOJI_CUSTOM_PLUGIN,
-    buttonClass: '',
-    title: 'Emoji',
-    dataDisplay: 'command',
-    innerHTML:
-      '<span class="font-icon se-icon se-icon-emoticon" style="font-size: 24px;"></span>',
-  },
+  name: EMOJI_CUSTOM_PLUGIN,
+  display: 'command',
+  add: () => {},
+  action: onEmojiButtonClick,
 });
 
 export default {

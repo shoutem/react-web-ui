@@ -1,27 +1,15 @@
 import _ from 'lodash';
-import customPlugins from './customPlugins';
+import sunEditorPlugins from 'suneditor/src/plugins'
 
-export function resolveEditorOptions(allPlugins) {
-  const resolvedPlugins = _.map(allPlugins, plugin => {
-    if (
-      plugin.name === customPlugins.IMAGESCC_CUSTOM_PLUGIN ||
-      plugin.name === customPlugins.EMOJI_CUSTOM_PLUGIN
-    ) {
-      return null;
+export function resolveEditorOptions(customPlugins) {
+  const resolvedPlugins = [...customPlugins];
+
+  _.forEach(sunEditorPlugins, plugin => {
+    const item = _.find(customPlugins, { name: plugin.name});
+    if (!item) {
+      resolvedPlugins.push(plugin);
     }
-
-    return plugin.definition;
-  });
-  const resolvedCustomPluginButtons = _.map(allPlugins, plugin => {
-    if (
-      plugin.name === customPlugins.IMAGESCC_CUSTOM_PLUGIN ||
-      plugin.name === customPlugins.EMOJI_CUSTOM_PLUGIN
-    ) {
-      return null;
-    }
-
-    return plugin.toolbarComponent;
-  });
+  })
 
   return {
     plugins: resolvedPlugins,
@@ -77,7 +65,6 @@ export function resolveEditorOptions(allPlugins) {
             '<span class="font-icon se-icon se-icon-emoticon" style="font-size: 24px;"></span>',
         },
       ],
-      ...resolvedCustomPluginButtons,
     ],
   };
 }
