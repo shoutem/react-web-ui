@@ -1,6 +1,6 @@
 {
   "name": "@shoutem/react-web-ui",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "React UI kit for Shoutem extensions",
   "main": "lib/index.js",
   "files": [
