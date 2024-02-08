@@ -34,21 +34,17 @@ export default class RichTextEditor extends Component {
     const plugins = [];
 
     // if there is no unsplashAccessKey, do not create image plugin
-    const unsplashAccessKey = _.get(this.props, 'imagePickerOptions.unsplashAccessKey');
+    const unsplashAccessKey = _.get(
+      this.props,
+      'imagePickerOptions.unsplashAccessKey',
+    );
     if (!_.isEmpty(unsplashAccessKey)) {
-      plugins.push(customPlugins.initImagesCC(
-        this.handleShowImagePickerModal,
-      ));
+      plugins.push(customPlugins.initImagesCC(this.handleShowImagePickerModal));
     }
-   
-    plugins.push(customPlugins.initEmojiPicker(
-      this.handleToggleEmojiPicker,
-    ));
 
-    const allPlugins = [
-      ...plugins,
-      ...props.customPlugins,
-    ];
+    plugins.push(customPlugins.initEmojiPicker(this.handleToggleEmojiPicker));
+
+    const allPlugins = [...plugins, ...props.customPlugins];
 
     this.editorOptions = resolveEditorOptions(allPlugins);
 
@@ -126,9 +122,9 @@ export default class RichTextEditor extends Component {
     this.editorRef.current = suneditor;
   }
 
-  handleOnDrop() {
-    // to prevent any objects being droped (image...) and converted to base64
-    // we are disabling drag and drop
+  handleOnImageUploadBefore() {
+    // to prevent images from being dropped or pasted and then converted automatically to base64
+    // we are disabling this functionality
     return false;
   }
 
@@ -176,7 +172,7 @@ export default class RichTextEditor extends Component {
           setContents={rteValue}
           onClick={this.handleHideEmojiPicker}
           onChange={this.handleValueChanged}
-          onDrop={this.handleOnDrop}
+          onImageUploadBefore={this.handleOnImageUploadBefore}
           setOptions={this.editorOptions}
         />
       </div>
