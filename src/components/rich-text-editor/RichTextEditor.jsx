@@ -30,19 +30,23 @@ export default class RichTextEditor extends Component {
     this.editorRef = createRef();
     this.emojiPickerRef = createRef();
 
-    // Resolve custom plugins (toolbar options)
-    const imagesCCplugin = customPlugins.initImagesCC(
-      this.handleShowImagePickerModal,
+    // Resolve plugins (toolbar options)
+    const plugins = [];
+
+    // if there is no unsplashAccessKey, do not create image plugin
+    const unsplashAccessKey = _.get(
+      this.props,
+      'imagePickerOptions.unsplashAccessKey',
     );
-    const emojiPickerPlugin = customPlugins.initEmojiPicker(
-      this.handleToggleEmojiPicker,
-    );
-    const allCustomPlugins = [
-      imagesCCplugin,
-      emojiPickerPlugin,
-      ...props.customPlugins,
-    ];
-    this.editorOptions = resolveEditorOptions(allCustomPlugins);
+    if (!_.isEmpty(unsplashAccessKey)) {
+      plugins.push(customPlugins.initImagesCC(this.handleShowImagePickerModal));
+    }
+
+    plugins.push(customPlugins.initEmojiPicker(this.handleToggleEmojiPicker));
+
+    const allPlugins = [...plugins, ...props.customPlugins];
+
+    this.editorOptions = resolveEditorOptions(allPlugins);
 
     this.state = {
       rteValue: initialValue,
@@ -118,6 +122,12 @@ export default class RichTextEditor extends Component {
     this.editorRef.current = suneditor;
   }
 
+  handleOnImageUploadBefore() {
+    // to prevent images from being dropped or pasted and then converted automatically to base64
+    // we are disabling this functionality
+    return false;
+  }
+
   render() {
     const {
       enableImageAlign,
@@ -162,6 +172,7 @@ export default class RichTextEditor extends Component {
           setContents={rteValue}
           onClick={this.handleHideEmojiPicker}
           onChange={this.handleValueChanged}
+          onImageUploadBefore={this.handleOnImageUploadBefore}
           setOptions={this.editorOptions}
         />
       </div>

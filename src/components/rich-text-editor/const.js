@@ -1,15 +1,31 @@
 import _ from 'lodash';
-import sunEditorPlugins from 'suneditor/src/plugins'
+import sunEditorPlugins from 'suneditor/src/plugins';
+import { IMAGESCC_CUSTOM_PLUGIN } from './customPlugins';
 
 export function resolveEditorOptions(customPlugins) {
+  const attachmentsButtonList = ['link', 'video', 'image'];
   const resolvedPlugins = [...customPlugins];
 
   _.forEach(sunEditorPlugins, plugin => {
-    const item = _.find(customPlugins, { name: plugin.name});
+    const item = _.find(customPlugins, { name: plugin.name });
     if (!item) {
       resolvedPlugins.push(plugin);
     }
-  })
+  });
+
+  const imagesCCcustomPluginExist = _.find(customPlugins, {
+    name: IMAGESCC_CUSTOM_PLUGIN,
+  });
+  if (imagesCCcustomPluginExist) {
+    attachmentsButtonList.push({
+      name: IMAGESCC_CUSTOM_PLUGIN,
+      dataCommand: IMAGESCC_CUSTOM_PLUGIN,
+      title: 'Image',
+      dataDisplay: 'command',
+      innerHTML:
+        '<span class="font-icon se-icon se-icon-imagecreativecommons" style="font-size: 24px;"></span>',
+    });
+  }
 
   return {
     plugins: resolvedPlugins,
@@ -41,19 +57,7 @@ export function resolveEditorOptions(customPlugins) {
         'indent',
       ],
       ['align', 'list', 'table'],
-      [
-        'link',
-        'video',
-        'image',
-        {
-          name: 'imagesCCcustomPlugin',
-          dataCommand: 'imagesCCcustomPlugin',
-          title: 'Image',
-          dataDisplay: 'command',
-          innerHTML:
-            '<span class="font-icon se-icon se-icon-imagecreativecommons" style="font-size: 24px;"></span>',
-        },
-      ],
+      attachmentsButtonList,
       [
         {
           name: 'emojiCustomPlugin',
