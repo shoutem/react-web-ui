@@ -1,7 +1,7 @@
 // Docs on custom plugins: http://suneditor.com/sample/html/customPlugins.html
 
-const IMAGESCC_CUSTOM_PLUGIN = 'imagesCCcustomPlugin';
-const EMOJI_CUSTOM_PLUGIN = 'emojiCustomPlugin';
+export const IMAGESCC_CUSTOM_PLUGIN = 'imagesCCcustomPlugin';
+export const EMOJI_CUSTOM_PLUGIN = 'emojiCustomPlugin';
 
 const initImagesCC = onImagesButtonClick => ({
   name: IMAGESCC_CUSTOM_PLUGIN,
