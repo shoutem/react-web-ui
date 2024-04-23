@@ -2,9 +2,10 @@ import _ from 'lodash';
 import sunEditorPlugins from 'suneditor/src/plugins';
 import { IMAGESCC_CUSTOM_PLUGIN } from './customPlugins';
 
-export function resolveEditorOptions(customPlugins) {
+export function resolveEditorOptions(customPlugins, options = {}) {
   const attachmentsButtonList = ['link', 'video', 'image'];
   const resolvedPlugins = [...customPlugins];
+  const { enableImageUpload } = options;
 
   _.forEach(sunEditorPlugins, plugin => {
     const item = _.find(customPlugins, { name: plugin.name });
@@ -38,7 +39,8 @@ export function resolveEditorOptions(customPlugins) {
     mediaAutoSelect: false,
     videoResizing: false,
     formats: ['div', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
-    imageFileInput: false,
+    imageFileInput: !!enableImageUpload,
+    imageMultipleFile: false,
     linkProtocol: 'https://',
     buttonList: [
       ['undo', 'redo', 'removeFormat'],

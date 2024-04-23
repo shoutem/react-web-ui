@@ -26,7 +26,8 @@ export default class RichTextEditor extends Component {
 
     autoBindReact(this);
 
-    const initialValue = _.get(this.props, 'value');
+    const { enableImageUpload, value: initialValue } = props;
+
     this.editorRef = createRef();
     this.emojiPickerRef = createRef();
 
@@ -46,7 +47,9 @@ export default class RichTextEditor extends Component {
 
     const allPlugins = [...plugins, ...props.customPlugins];
 
-    this.editorOptions = resolveEditorOptions(allPlugins);
+    this.editorOptions = resolveEditorOptions(allPlugins, {
+      enableImageUpload,
+    });
 
     this.state = {
       rteValue: initialValue,
@@ -122,9 +125,47 @@ export default class RichTextEditor extends Component {
     this.editorRef.current = suneditor;
   }
 
-  handleOnImageUploadBefore() {
-    // to prevent images from being dropped or pasted and then converted automatically to base64
-    // we are disabling this functionality
+  async handleImageUpload(file, uploadHandler) {
+    const { onImageUpload } = this.props;
+
+    if (!_.isFunction(onImageUpload)) {
+      return;
+    }
+
+    const url = await onImageUpload(file);
+
+    if (!url) {
+      uploadHandler();
+      return;
+    }
+
+    const res = {
+      result: [
+        {
+          url,
+          name: file.name,
+        },
+      ],
+    };
+
+    uploadHandler(res);
+  }
+
+  handleOnImageUploadBefore(files, info, uploadHandler) {
+    const { enableImageUpload } = this.props;
+
+    if (enableImageUpload) {
+      const file = _.first(files);
+
+      if (!file) {
+        return false;
+      }
+
+      this.handleImageUpload(file, uploadHandler);
+
+      return undefined;
+    }
+
     return false;
   }
 
@@ -173,6 +214,7 @@ export default class RichTextEditor extends Component {
           onClick={this.handleHideEmojiPicker}
           onChange={this.handleValueChanged}
           onImageUploadBefore={this.handleOnImageUploadBefore}
+          onImageUpload={_.noop}
           setOptions={this.editorOptions}
         />
       </div>
@@ -182,6 +224,7 @@ export default class RichTextEditor extends Component {
 
 RichTextEditor.propTypes = {
   customPlugins: PropTypes.array,
+  enableImageUpload: PropTypes.bool,
   enableImageAlign: PropTypes.bool,
   enableImageDescription: PropTypes.bool,
   enableImageFormatting: PropTypes.bool,
@@ -190,11 +233,13 @@ RichTextEditor.propTypes = {
   imagePickerLocalization: PropTypes.object,
   imagePickerOptions: PropTypes.object,
   onChange: PropTypes.func.isRequired,
+  onImageUpload: PropTypes.func,
   value: PropTypes.string.isRequired,
 };
 
 RichTextEditor.defaultProps = {
   customPlugins: [],
+  enableImageUpload: false,
   enableImageAlign: false,
   enableImageDescription: false,
   enableImageFormatting: false,
