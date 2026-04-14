@@ -28,6 +28,12 @@ export function resolveEditorOptions(customPlugins, options = {}) {
     });
   }
 
+  _.forEach(customPlugins, plugin => {
+    if (plugin.buttonConfig) {
+      attachmentsButtonList.push(plugin.buttonConfig);
+    }
+  });
+
   return {
     plugins: resolvedPlugins,
     height: 300,
